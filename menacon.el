@@ -48,6 +48,10 @@
   (interactive)
   (find-file "/Users/anttim/Documents/lisp/menacon.el"))
 
+(defun mc-cp-filename()
+  (interactive)
+  (kill-new (buffer-file-name)))
+
 ;; =================================================================================================
 (defun mc-log-prt (level)
   "Inserts log-print message to point"

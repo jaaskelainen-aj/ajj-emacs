@@ -83,6 +83,7 @@
 (global-set-key (kbd "s-r") 'copy-to-register)
 (global-set-key (kbd "<s-kp-enter>") 'overwrite-mode)
 (global-set-key (kbd "M-s-a") 'helm-ag)
+(global-set-key (kbd "M-s-s") 'swiper-helm)
 
 (global-set-key "\M-n" 'other-window)
 (global-set-key "\C-\M-\\" 'indent-region)
@@ -132,13 +133,10 @@
   [speedbar] '("Speedbar" . speedbar-frame-mode) [calendar])
 
 ;; ===============================================================
-;; COLORS
-;; ===============================================================
-;; # Currently only in .emacs
-
-;; ===============================================================
 ;; GLOBAL SETTINGS
 ;; ===============================================================
+(setq frame-title-format "%f ( %I )")
+
 (setq 
   line-number-mode t
   column-number-mode t

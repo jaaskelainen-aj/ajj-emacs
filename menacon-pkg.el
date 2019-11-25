@@ -32,8 +32,7 @@
   (use-package magit
     :ensure t
     :config
-    (setq magit-diff-use-overlays nil)
-    )
+    (setq magit-diff-use-overlays nil))
 
   (use-package helm-rtags
     :ensure t
@@ -49,12 +48,14 @@
 	  )
     :config
     (setq helm-grep-ag-command "ag --line-numbers -S --hidden --color --color-match '31;43' --nogroup %s %s %s")
-    (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
-  
-    :after (helm magit)
-    )
+    (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))  
+    :after (helm magit))
   (load "pkg-helm-config")
-  
+
+  (use-package swiper-helm
+    :ensure t
+    :after (helm))
+
   ;; CFF
   (require 'cff)
   (add-hook 'c++-mode-hook
