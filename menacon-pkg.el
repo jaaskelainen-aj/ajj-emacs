@@ -1,9 +1,10 @@
 (defun mc-packages-init()
   (add-to-list 'load-path "~/ajj-emacs/ext")
   (require 'bind-key)
-  (require 'helm)
-  (require 'magit)
-  (require 'robot-mode)
+  (require 'use-package)
+  (use-package helm :ensure t)
+  (use-package magit :ensure t)
+  ;;(require 'robot-mode)
   
   (use-package which-key :ensure t)
   (use-package find-file-in-repository
@@ -69,8 +70,10 @@
     :ensure t
     :bind
     (("C-x f" . find-file-in-repository)))
-  
+
+  (use-package cff :ensure t)
   ) ;; mc-packages-init
+
 
 (defun mc-packages-update()
   (interactive)
