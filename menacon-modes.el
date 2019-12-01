@@ -53,6 +53,8 @@
   (helm-mode 1)
   (global-hl-line-mode)
   (electric-pair-mode)
+  (projectile-global-mode)
+  (helm-projectile-on)
   )
 
 ;; --------------------------------------------------------------------------------

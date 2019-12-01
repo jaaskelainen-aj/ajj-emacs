@@ -69,6 +69,9 @@
     :ensure t
     :bind
     (("C-x f" . find-file-in-repository)))
+
+  (use-package projectile :ensure t)
+  (use-package helm-projectile :ensure t)
   
   ) ;; mc-packages-init
 
