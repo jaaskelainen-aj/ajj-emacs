@@ -123,7 +123,11 @@
 	  )
 	)
   )
-
+;; ..................................................................................................
+(defun mc-insert-vtag()
+  (interactive)
+  (insert "_«V»")
+  )
 ;; ..................................................................................................
 (defun mc-remove-compilation-window()
   "Removes the compilatin window and deletes the compilation buffer"

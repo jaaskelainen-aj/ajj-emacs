@@ -1,9 +1,14 @@
 (defun mc-packages-init()
   (add-to-list 'load-path "~/ajj-emacs/ext")
+  (require 'align)
   (require 'bind-key)
-  (require 'helm)
-  (require 'magit)
-  (require 'robot-mode)
+  (require 'paren)
+  (require 'cc-mode)
+  (require 'use-package)
+  (load "pkg-helm-config")
+
+  (use-package magit :ensure t)
+  ;;(require 'robot-mode)
   
   (use-package which-key :ensure t)
   (use-package find-file-in-repository
@@ -41,39 +46,23 @@
   (use-package helm-ag
     :ensure t
     :init
-    :bind
-    (
-     :map global-map
-	  ("M-p" . helm-ag-project-root)
-	  )
     :config
     (setq helm-grep-ag-command "ag --line-numbers -S --hidden --color --color-match '31;43' --nogroup %s %s %s")
     (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))  
     :after (helm magit))
-  (load "pkg-helm-config")
 
   (use-package swiper-helm
     :ensure t
     :after (helm))
 
-  ;; CFF
-  (require 'cff)
-  (add-hook 'c++-mode-hook
-            '(lambda ()
-               (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
-  (add-hook 'c-mode-hook
-            '(lambda ()
-               (define-key c-mode-base-map (kbd "M-o") 'cff-find-other-file)))
-
-  (use-package find-file-in-repository
-    :ensure t
-    :bind
-    (("C-x f" . find-file-in-repository)))
-
-  (use-package projectile :ensure t)
-  (use-package helm-projectile :ensure t)
   
+  (use-package cff :ensure t)
+  (use-package find-file-in-repository :ensure t)
+  (use-package projectile :ensure t)
+  (use-package helm-projectile :ensure t)  
+  (use-package cff :ensure t)
   ) ;; mc-packages-init
+
 
 (defun mc-packages-update()
   (interactive)

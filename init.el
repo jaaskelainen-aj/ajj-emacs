@@ -5,10 +5,11 @@
 ;; ===============================================================
 
 (when (eq system-type 'gnu/linux)
-  (when window-system (progn
+  (when window-system
+    (tool-bar-mode 0)
     (setq server-socket-dir "~/.emacs.d/")
     (server-start)
-    )))
+    ))
 
 (when (eq system-type 'darwin)
   (define-key global-map [home] 'beginning-of-line)
@@ -34,9 +35,6 @@
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
 (package-initialize)
-
-(require 'cc-mode)
-(require 'align)
 
 (load "menacon-pkg")
 (load "menacon-modes")
@@ -91,7 +89,6 @@
 (global-set-key (kbd "C-M-'") '(lambda () (interactive) (insert "\\\"")))
 (global-set-key "\C-h\C-c" 'describe-face)
 (global-set-key "§" '(lambda() (interactive)(insert "´")))
-(global-set-key (kbd "<f14>") '(lambda() (interactive)(insert "_«V»")))
 
 ;Function keys
 (global-set-key [f2] 'mc-match-paren)
@@ -141,7 +138,6 @@
   line-number-mode t
   column-number-mode t
   default-tab-width 4
-  show-paren-mode t
   delete-key-deletes-forward t
   make-backup-files nil
   split-height-threshold nil
@@ -162,3 +158,4 @@
   )
 
 (setq-default fill-column 120)
+(setq-default show-paren-mode t)

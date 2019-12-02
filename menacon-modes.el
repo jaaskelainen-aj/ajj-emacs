@@ -98,6 +98,11 @@
   (define-key map [f8]   'mc-toggle-source)
   (define-key map [C-f8] 'mc-narrow-to-function)
   (define-key map [C-delete] 'mc-remove-right-wspace)
+  ;; Search keys
+  (define-key map [C-M-f8] 'cff-find-other-file)
+  (define-key map (kbd "C-f") 'helm-ag-this-file)
+  (define-key map (kbd "M-f") 'helm-do-ag)
+  (define-key map (kbd "M-s-f") 'helm-do-ag-project-root)
   ;; web server dev macros
   ;;? (define-key map (kbd "M-g s") '(lambda() (interactive) (insert "\"<<GETS(0x0000)<<\"")))
   ;;? (define-key map (kbd "M-g p") '(lambda() (interactive) (insert "\"<p>\"<<GETS(0x0000)<<\"</p>\"")))  
@@ -126,6 +131,8 @@
 (defun mc-set-cc-mode ()
   (c-set-style "KoneCPP")
   (mc-set-programming-mode c-mode-base-map)
+  (setq helm-ag-command-option "--cpp")
+  ;;(setq helm-ag-ignore-buffer-patterns '("\\.js\\'" "\\.mkd\\'"))
   )
 
 (defun mc-set-java-mode ()

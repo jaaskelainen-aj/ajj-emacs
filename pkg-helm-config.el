@@ -5,7 +5,8 @@
 	helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
 	helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
 	helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-	helm-ff-file-name-history-use-recentf t)
+	helm-ff-file-name-history-use-recentf t
+	helm-candidate-number-limit	      75)
 
   :bind
   (
@@ -13,8 +14,8 @@
    ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
    ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
    ("C-e"     . helm-command-prefix)
-   ("M-x"     . helm-M-x)
-   ("M-y"     . helm-show-kill-ring)
+   ("M-s-x"     . helm-M-x)
+   ;;("M-y"     . helm-show-kill-ring)
    ("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-buffers-list)
    ("C-x C-b" . ibuffer) 
@@ -27,8 +28,13 @@
   :config
   ;;COLORS
   (set-face-attribute 'helm-selection nil 
-                      :background "#252555"
+                      :background "#252555" ;;"#A4A4F7"
                       :foreground nil)
+  (set-face-attribute 'helm-ff-executable t
+		      :foreground "#168916")
+  (set-face-attribute 'helm-moccur-buffer t
+		      :foreground "#007C7C" :underline t)
+
   ;; OTHER
   (unbind-key "C-x c" global-map)
   (helm-autoresize-mode t)
@@ -40,8 +46,4 @@
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
   ) ;; use-package
-
-(set-face-attribute 'helm-selection nil 
-		    :background "#A4A4F7"
-		    :foreground nil)
 

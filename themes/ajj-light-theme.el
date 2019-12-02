@@ -39,7 +39,7 @@
    '(cursor ((t (:foreground "black" :background "black"))))
    '(trailing-whitespace ((t (:background "#ffbd7b"))))
 
-   '(show-paren-match ((t (:background "#bcd5fa" :foreground "white"))))
+   '(show-paren-match ((t (:underline t :background "#FFD9BA" :foreground "blue"))))
    '(show-paren-mismatch ((t (:bold t :background "#9d1e15" :foreground "#f8f8f8"))))
 
    '(font-lock-warning-face ((t (:background "#ffe4b5"))))
@@ -61,6 +61,8 @@
    '(font-lock-string-face ((t (:foreground "#409b1c"))))
    '(font-lock-type-face ((t (:foreground "#445588"))))
    '(font-lock-variable-name-face ((t (:foreground "#671ebb"))))
+
+   '(helm-buffer-directory ((t (:foreground "Blue"))))
 
    '(mac-ts-caret-position ((t (:background "#effca6"))))
 
