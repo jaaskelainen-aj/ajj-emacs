@@ -14,27 +14,18 @@
    ;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
    ;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
    ("C-e"     . helm-command-prefix)
-   ("M-s-x"     . helm-M-x)
-   ;;("M-y"     . helm-show-kill-ring)
+   ("M-s-x"    . helm-M-x)
+   ;;("M-y"    . helm-show-kill-ring)
    ("C-x C-f" . helm-find-files)
    ("C-x b"   . helm-buffers-list)
-   ("C-x C-b" . ibuffer) 
+   ("C-x C-b" . ibuffer)
+
    :map helm-map
    ("<tab>" . helm-execute-persistent-action) ; rebind tab to run persistent action
    ("C-i"   . helm-execute-persistent-action) ; make TAB works in terminal
    ("C-z"   . helm-select-action) ; list actions using C-z
    )
   
-  :config
-  ;;COLORS
-  (set-face-attribute 'helm-selection nil 
-                      :background "#252555" ;;"#A4A4F7"
-                      :foreground nil)
-  (set-face-attribute 'helm-ff-executable t
-		      :foreground "#168916")
-  (set-face-attribute 'helm-moccur-buffer t
-		      :foreground "#007C7C" :underline t)
-
   ;; OTHER
   (unbind-key "C-x c" global-map)
   (helm-autoresize-mode t)

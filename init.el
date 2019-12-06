@@ -4,6 +4,7 @@
 ;; Basic environmentm, packages and modes
 ;; ===============================================================
 
+(add-to-list 'load-path "~/ajj-emacs/ext")
 (when (eq system-type 'gnu/linux)
   (when window-system
     (tool-bar-mode 0)
@@ -28,18 +29,22 @@
       (setq mac-option-modifier (quote meta))
       (setq mouse-wheel-progressive-speed nil)
       (setq server-socket-dir "~/.emacs.d/")
-      (server-start))
+      (server-start)
+      (require 'sourcetrail)
+      )
+    ;;else
     ((menu-bar-mode -1))
     ))
 
 (require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+                         ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
 (load "menacon-pkg")
 (load "menacon-modes")
 (load "menacon")
-(mc-packages-init)
+;; (mc-packages-init)
 (mc-modes-init)
 
 (setq custom-theme-directory "~/ajj-emacs/themes/")
@@ -158,4 +163,4 @@
   )
 
 (setq-default fill-column 120)
-(setq-default show-paren-mode t)
+(setq-default show-paren-mode 1)

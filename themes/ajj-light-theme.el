@@ -63,7 +63,10 @@
    '(font-lock-variable-name-face ((t (:foreground "#671ebb"))))
 
    '(helm-buffer-directory ((t (:foreground "Blue"))))
-
+   '(helm-ff-executable ((t (:foreground "#168916"))))
+   '(helm-selection ((t (background "#252555" :foreground nil))))
+   '(helm-moccur-buffer ((t (:foreground "#007C7C" :underline t))))
+   
    '(mac-ts-caret-position ((t (:background "#effca6"))))
 
    '(whitespace-line ((t (:inherit font-lock-code-warning))))
