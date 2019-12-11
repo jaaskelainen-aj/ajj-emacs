@@ -1,30 +1,90 @@
 (require 'align)
-(require 'bind-key)
 (require 'paren)
 (require 'cc-mode)
-(require 'use-package)
-(load "pkg-helm-config")
+(require 'which-key)
 
 ;;(require 'robot-mode)
 
-(use-package which-key
-  :ensure t)
-(use-package find-file-in-repository
-  :ensure t
-  :bind
-  (("C-x f" . find-file-in-repository)) )
+;; ------------------------------
+;; HELM
+(require 'helm)
+(setq helm-split-window-inside-p            t
+      helm-move-to-line-cycle-in-source     t
+      helm-ff-search-library-in-sexp        t
+      helm-scroll-amount                    8
+      helm-ff-file-name-history-use-recentf t
+      helm-candidate-number-limit	    150
+      helm-autoresize-mode                  t
+      helm-autoresize-max-height            50
+      helm-autoresize-min-height            20
+      helm-semantic-fuzzy-match             t
+      helm-imenu-fuzzy-match                t
+      helm-allow-mouse                      nil
+      )
 
-(use-package rtags
-  :ensure t
-  :bind
-  (
-   ("M-." . (function rtags-find-symbol-at-point))
-   ("M-," . (function rtags-find-references-at-point))
-   ("M-;" . (function rtags-find-file))
-   ("C-." . (function rtags-find-symbol))
-   ("C-," . (function rtags-find-references)) )
-  )
+(define-key global-map (kbd "C-e")     'helm-command-prefix)
+(define-key global-map (kbd "M-s-x")   'helm-M-x)
+(define-key global-map (kbd "M-y")     'helm-show-kill-ring)
+(define-key global-map (kbd "C-x C-f") 'helm-find-files)
+(define-key global-map (kbd "C-x b")   'helm-buffers-list)
+(define-key global-map (kbd "C-x C-b") 'ibuffer)
 
+(define-key global-map (kbd "C-x c") nil)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i")   'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-z")   'helm-select-action)
+
+
+;; ------------------------------
+;; FIND-FILE
+
+;; ------------------------------
+;; RTAGS
+(require 'rtags)
+(define-key global-map (kbd "M-.") 'rtags-find-symbol-at-point)
+(define-key global-map (kbd "M-,") 'rtags-find-references-at-point)
+(define-key global-map (kbd "M-;") 'rtags-find-file)
+(define-key global-map (kbd "C-.") 'rtags-find-symbol)
+(define-key global-map (kbd "C-,") 'rtags-find-references)
+
+;; ------------------------------
+;; after: helm, rtags
+(require 'helm-rtags)
+
+;; ------------------------------
+;; MAGIT
+(require 'magit)
+(setq magit-diff-use-overlays nil)
+
+;; ------------------------------
+;; AG silver search; after: helm, magit
+(require 'helm-ag)
+(setq helm-grep-ag-command "ag --line-numbers -S --hidden --color --color-match '31;43' --nogroup %s %s %s")
+(setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
+
+(define-key global-map (kbd "C-f") 'helm-ag-this-file)
+(define-key global-map (kbd "M-f") 'helm-do-ag)
+(define-key global-map (kbd "M-s-f") 'helm-do-ag-project-root)
+
+;; ------------------------------
+;; PROJECTILE
+(require 'projectile)
+(require 'helm-projectile)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+;;(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(setq projectile-indexing-method 'alien
+      projectile-enable-caching t
+      projectile-completion-system 'helm)
+;; (setq projectile-project-search-path '("~/projects/" "~/work/"))
+
+;; ------------------------------
+;; MISC
+(require 'swiper-helm)
+(require 'cff)
+
+
+;; ------------------------------
 ;;? (load-file "~/.emacs.d/mylib/org-recipes.el")
 ;;? (setq org-recipes-file-list (list
 ;;? 			       "~/.emacs.d/myrecipes/cpp_recipes.org"
@@ -32,31 +92,4 @@
 ;;? 			       "~/.emacs.d/myrecipes/org_recipes.org"
 ;;? 			       "~/.emacs.d/myrecipes/python_recipes.org"))
 ;;? (global-set-key [(f7)] 'org-recipes)
-(use-package magit
-  :ensure t
-  :config
-  (setq magit-diff-use-overlays nil))
 
-(use-package helm-rtags
-  :ensure t
-  :after (helm rtags))
-
-(use-package helm-ag
-  :ensure t
-  :init
-  :config
-  (setq helm-grep-ag-command "ag --line-numbers -S --hidden --color --color-match '31;43' --nogroup %s %s %s")
-  (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))  
-  :after (helm magit))
-
-(use-package swiper-helm
-  :ensure t
-  :after (helm))
-
-
-(use-package cff
-  :ensure t)
-;;(use-package projectile
-;;  :ensure t)
-;;(use-package helm-projectile
-;;  :ensure t)  

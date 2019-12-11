@@ -1,8 +1,8 @@
-;;; ajj-dark-theme.el --- A Theme based on the colors of the Google Material Design
+;;; material-theme.el --- A Theme based on the colors of the Google Material Design
 
 ;; Copyright (C) 2014 Paulik Christoph
 
-;; Author: Christoph Paulik <cpaulik@gmail.com>, AJJ
+;; Author: Christoph Paulik <cpaulik@gmail.com>
 ;; Keywords: themes
 ;; URL: http://github.com/cpaulik/emacs-material-theme
 ;; Version: 2015
@@ -31,7 +31,7 @@
 
 ;; To use it, put the following in your Emacs configuration file:
 ;;
-;;   (load-theme 'ajj-dark t)
+;;   (load-theme 'material t)
 ;;
 ;; Requirements: Emacs 24.
 
@@ -42,20 +42,20 @@
 
 ;;; Code:
 
-(deftheme ajj-dark
+(deftheme material
   "A UI Theme for Emacs based on material design colors")
 (display-color-cells (selected-frame))
 (let* ((class '((class color) (min-colors 89)))
        (256color  (eq (display-color-cells (selected-frame)) 256))
        (truecolor (eq (display-color-cells (selected-frame)) 16777216))
 
-       (background (if (or window-system truecolor) "#1A3549" "#262626")) ;; sidebar-container
-       (current-line (if (or window-system truecolor)  "#2B4456" "#3a3a3a")) ;; tree-row
+       (background (if (or window-system truecolor) "#263238" "#262626")) ;; sidebar-container
+       (current-line (if (or window-system truecolor)  "#37474f" "#3a3a3a")) ;; tree-row
        (far-background (if (or window-system truecolor)  "#1c1f26" "#121212")) ;; panel-control
        (inactive-gray (if (or window-system truecolor) "#78909c" "#8a8a8a"))
        (header-color (if (or window-system truecolor) "#455A64" "#5f5f5f"))
        (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
-       (selection "#B4A063") ;; tab-control-dirty-tab-close-button
+       (selection "#555555") ;; tab-control-dirty-tab-close-button
        (secondary-selection "#bf616a") ;; tab-control-hover-tab-close-button
        (foreground "#ffffff")
        (comment "#b0bec5") ;; table-row
@@ -68,7 +68,7 @@
        (purple "#b39ddb")) ;; complement tab-control-dirty-tab-close-button
 
   (custom-theme-set-faces
-   'ajj-dark
+   'material
    `(default ((,class (:foreground ,foreground :background ,background))))
    `(bold ((,class (:weight bold))))
    `(bold-italic ((,class (:slant italic :weight bold))))
@@ -865,7 +865,7 @@
    `(rpm-spec-var-face ((,class (:foreground ,red)))))
 
   (custom-theme-set-variables
-   'ajj-dark
+   'material
    `(fci-rule-color ,current-line)
    `(vc-annotate-color-map
      '((20  . ,red)
@@ -902,5 +902,11 @@
   (add-to-list 'custom-theme-load-path
                (file-name-as-directory (file-name-directory load-file-name))))
 
-(provide-theme 'ajj-dark)
+(provide-theme 'material)
 
+;; Local Variables:
+;; rainbow-mode: t
+;; hl-sexp-mode: nil
+;; End:
+
+;;; material-theme.el ends here

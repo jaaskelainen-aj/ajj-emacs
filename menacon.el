@@ -81,12 +81,36 @@
 
 
 ;; =================================================================================================
+;; NOT WORKING!
+(defcustom mc-locator-root nil
+  "Sets root directory for the locator filenames"
+  :type '(string))
+
+(defun mc-locate()
+  (interactive)
+  (let (fp path_begin path_end)
+    (while (looking-at "[^a-z0-9A-Z\/\.]")
+      (backward-char))
+    (setq path_begin (point))
+    (search-forward ":" (line-end-position) nil)
+    (setq path_end (point))
+    (setq fp (concat mc-locator-root (buffer-substring path_begin path_end)))
+    (message "Found: %s" fp)
+    (find-file-other-window fp)
+    )
+  )
+
+;; =================================================================================================
+(defun mc-revert-buildlog()
+  (interactive)
+  (revert-buffer t t t)
+  )
+;; ..................................................................................................
 (defun mc-prev-buf ()
   "Switches to previous buffer"
   (interactive)
   (switch-to-buffer (other-buffer))
   )
-
 ;; ..................................................................................................
 (defun mc-remove-right-wspace()
   (interactive)
@@ -94,7 +118,6 @@
 	(delete-char 1)
 	)
   )
-
 ;; ..................................................................................................
 (defun mc-remove-trailing-M ()
   "Removes the trailing ^M from a file."
@@ -104,7 +127,6 @@
 	(perform-replace "\^M" "" nil nil nil)
 	(pop-mark))
   )
-
 ;; ..................................................................................................
 (defun mc-save-kill ()
   "Normal buffers: Saves the current buffer and kills it. 

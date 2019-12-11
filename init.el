@@ -5,6 +5,7 @@
 ;; ===============================================================
 
 (add-to-list 'load-path "~/ajj-emacs/ext")
+(add-to-list 'load-path "~/ajj-emacs/themes")
 (when (eq system-type 'gnu/linux)
   (when window-system
     (tool-bar-mode 0)
@@ -36,6 +37,7 @@
     ((menu-bar-mode -1))
     ))
 
+;; See install-base.el also
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("melpa" . "https://melpa.org/packages/")))
@@ -44,11 +46,10 @@
 (load "menacon-pkg")
 (load "menacon-modes")
 (load "menacon")
-;; (mc-packages-init)
 (mc-modes-init)
 
 (setq custom-theme-directory "~/ajj-emacs/themes/")
-(load-theme 'ajj-light t)
+;;(load-theme 'ajj-light t)
 
 (add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
 
@@ -152,7 +153,6 @@
   inhibit-startup-screen t
   initial-scratch-message nil
   ;;
-  custom-theme-directory "~/ajj-emacs/themes/"
   grep-command "grep  -n "
   grep-find-command
    (quote
