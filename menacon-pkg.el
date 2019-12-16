@@ -15,8 +15,8 @@
       helm-ff-file-name-history-use-recentf t
       helm-candidate-number-limit	    150
       helm-autoresize-mode                  t
-      helm-autoresize-max-height            50
-      helm-autoresize-min-height            20
+      helm-autoresize-max-height            75
+      helm-autoresize-min-height            40
       helm-semantic-fuzzy-match             t
       helm-imenu-fuzzy-match                t
       helm-allow-mouse                      nil
