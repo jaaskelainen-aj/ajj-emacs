@@ -52,6 +52,7 @@
        (background (if (or window-system truecolor) "#1A3549" "#262626")) ;; sidebar-container
        (current-line (if (or window-system truecolor)  "#2B4456" "#3a3a3a")) ;; tree-row
        (far-background (if (or window-system truecolor)  "#1c1f26" "#121212")) ;; panel-control
+       (modeline-background (if (or window-system truecolor) "#8093A2" "#121212"))
        (inactive-gray (if (or window-system truecolor) "#78909c" "#8a8a8a"))
        (header-color (if (or window-system truecolor) "#455A64" "#5f5f5f"))
        (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
@@ -221,13 +222,10 @@
    `(highlight ((,class (:inverse-video nil :background ,current-line))))
    `(hl-line ((,class (:inverse-video nil :background ,current-line))))
    `(gui-element ((,class (:background ,current-line :foreground ,foreground))))
-   `(mode-line ((,class (:foreground ,foreground :background ,far-background))))
-   `(mode-line-buffer-id ((,class (:foreground ,foreground :background nil :weight bold))))
-   `(mode-line-inactive ((,class (:inherit mode-line
-                                           :foreground ,subtle
-                                           :background ,far-background :weight normal
-                                           :box nil))))
-   `(mode-line-emphasis ((,class (:foreground ,foreground :slant italic))))
+   `(mode-line ((,class (:inverse-video t :background ,modeline-background))))
+   `(mode-line-buffer-id ((,class (:inherit mode-line :weight bold))))
+   `(mode-line-inactive ((,class (:inherit mode-line :background, inactive-gray :weight normal :box nil))))
+   `(mode-line-emphasis ((,class (:inherit mode-line :slant italic))))
    `(mode-line-highlight ((,class (:foreground ,purple :box nil))))
    `(minibuffer-prompt ((,class (:foreground ,blue))))
    `(region ((,class (:background ,selection))))

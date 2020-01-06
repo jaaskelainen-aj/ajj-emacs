@@ -9,6 +9,7 @@
 (when (eq system-type 'gnu/linux)
   (when window-system
     (tool-bar-mode 0)
+    (set-face-font 'default "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
     (setq server-socket-dir "~/.emacs.d/")
     (server-start)
     ))
@@ -21,6 +22,7 @@
   (setq shell-file-name "/bin/bash")
   (setq shell-command-switch "-ic")
   (if window-system (progn
+      (set-face-font 'default "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
       (define-key global-map [ns-drag-file] 'ns-find-file-in-frame)
       (define-key global-map [s-tab] 'next-multiframe-window)
       ;; (global-set-key (kbd "C->") 'previous-multiframe-window)
@@ -34,7 +36,9 @@
       (require 'sourcetrail)
       )
     ;;else
-    ((menu-bar-mode -1))
+    (
+     ;;(menu-bar-mode -1)
+     )
     ))
 
 ;; See install-base.el also
@@ -115,16 +119,16 @@
 (global-set-key [C-f9] 'copy-to-register)
 (global-set-key [M-f9] 'insert-register)
 
-(global-set-key [f10] 'mc-point-to-reg1)
-(global-set-key [S-f10] 'mc-copy-sel-to-point1)
-(global-set-key [C-f10] 'mc-move-sel-to-point1)
-(global-set-key [S-C-f10] 'mc-insert-reg2)
+(global-set-key [M-f10] 'mc-line-copy-char)
+(global-set-key [S-M-f10] '(lambda () (interactive)(mc-line-copy-char nil)))
 
 (global-set-key [C-f11] 'mc-search-clear)
 (global-set-key [M-f11] 'mc-search-this-word)
 
-(global-set-key [M-f12] 'mc-line-copy-char)
-(global-set-key [S-M-f12] '(lambda () (interactive)(mc-line-copy-char nil)))
+(global-set-key [f12] 'mc-point-to-reg1)
+(global-set-key [S-f12] 'mc-copy-sel-to-point1)
+(global-set-key [C-f12] 'mc-move-sel-to-point1)
+(global-set-key [S-C-f12] 'mc-insert-reg2)
 
 ; Unset the reserved mac keys
 ; ??

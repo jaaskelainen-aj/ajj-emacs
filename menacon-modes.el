@@ -56,6 +56,11 @@
   (electric-pair-mode)
   (projectile-global-mode)
   (helm-projectile-on)
+
+  ;; PHP
+  (when (file-directory-p "~/ajj-emacs/ext/php")
+    (load "~/ajj-emacs/ext/php/php-mode-autoloads.el"))
+  
   )
 
 ;; --------------------------------------------------------------------------------

@@ -35,10 +35,6 @@
 (define-key helm-map (kbd "C-i")   'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-z")   'helm-select-action)
 
-
-;; ------------------------------
-;; FIND-FILE
-
 ;; ------------------------------
 ;; RTAGS
 (require 'rtags)
@@ -77,6 +73,12 @@
       projectile-enable-caching t
       projectile-completion-system 'helm)
 ;; (setq projectile-project-search-path '("~/projects/" "~/work/"))
+
+;; ------------------------------
+;; ORG mode
+(require 'org)
+(setq org-log-done t)
+(define-key global-map (kbd "M-s-l") 'org-store-link)
 
 ;; ------------------------------
 ;; MISC
