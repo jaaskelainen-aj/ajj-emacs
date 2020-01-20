@@ -21,7 +21,7 @@
 
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js[x]$\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.json5?$\\'" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.json?\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.txt?\\'" . text-mode))
 
   (add-to-list 'auto-mode-alist '("\\.\\(h||c4s\\)\\'" . c++-mode))
@@ -157,7 +157,8 @@
 (defun mc-set-json-mode()
   (setq indent-tabs-mode nil)
   (setq case-fold-search nil)
-  (setq tab-width 2)
+  (setq tab-width 4)
+  (setq js-indent-level 4)
   (setq fill-column 120)
   )  
 

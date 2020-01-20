@@ -89,7 +89,7 @@
 (global-set-key (kbd "M-<up>") 'c-beginning-of-defun)
 (global-set-key (kbd "M-<down>") 'c-end-of-defun)
 (global-set-key (kbd "s-r") 'copy-to-register)
-(global-set-key (kbd "<s-kp-enter>") 'overwrite-mode)
+(global-set-key (kbd "<s-return>") 'overwrite-mode)
 (global-set-key (kbd "M-s-a") 'helm-ag)
 (global-set-key (kbd "M-s-s") 'swiper-helm)
 
