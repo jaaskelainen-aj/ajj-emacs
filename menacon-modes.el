@@ -15,6 +15,7 @@
   (add-hook 'python-mode-hook  'mc-set-py-mode)
   (add-hook 'js-mode-hook      'mc-set-js-mode)
   (add-hook 'json-mode-hook    'mc-set-json-mode)
+  (add-hook 'conf-unix-mode-hook 'mc-set-conf-mode)
 
   (defvaralias 'c-basic-offset 'tab-width)
   (defvaralias 'js-indent-level 'tab-width)
@@ -193,7 +194,6 @@
 
 (defun mc-set-py-mode()
   "Menacon Python mode extras"
-  (interactive)
   (setq indent-tabs-mode t)
   (setq tab-width 4)
   (setq fill-column 120)  
@@ -205,9 +205,13 @@
 
 (defun mc-set-php-mode()
   "Menacon php-mode"
-  (interactive)
   (setq indent-tabs-mode nil)
   (setq fill-column 110)  
   (setq tab-width 4)
   (setq php-template-compatibility nil)  
+  )
+
+(defun mc-set-conf-mode()
+  "Menacon conf mode"
+  (setq truncate-lines t)
   )
