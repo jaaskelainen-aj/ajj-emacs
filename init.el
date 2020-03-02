@@ -99,6 +99,8 @@
 (global-set-key (kbd "C-M-'") '(lambda () (interactive) (insert "\\\"")))
 (global-set-key "\C-h\C-c" 'describe-face)
 (global-set-key "§" '(lambda() (interactive)(insert "´")))
+(global-set-key (kbd "s->") '(lambda() (interactive)(insert "»")))
+(global-set-key (kbd "s-<") '(lambda() (interactive)(insert "«")))
 
 ;Function keys
 (global-set-key [f2] 'mc-match-paren)

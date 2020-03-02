@@ -22,7 +22,7 @@
 
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.js[x]$\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.json?\\'" . json-mode))
+  (add-to-list 'auto-mode-alist '("\\.?json?\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.txt?\\'" . text-mode))
 
   (add-to-list 'auto-mode-alist '("\\.\\(h||c4s\\)\\'" . c++-mode))
