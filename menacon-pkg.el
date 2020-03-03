@@ -58,6 +58,8 @@
 (require 'helm-ag)
 (setq helm-grep-ag-command "ag --line-numbers -S --hidden --color --color-match '31;43' --nogroup %s %s %s")
 (setq helm-grep-ag-pipe-cmd-switches '("--color-match '31;43'"))
+(setq helm-ag-use-agignore t)
+(make-variable-buffer-local 'helm-ag-command-option)
 
 (define-key global-map (kbd "C-f") 'helm-ag-this-file)
 (define-key global-map (kbd "M-f") 'helm-do-ag)

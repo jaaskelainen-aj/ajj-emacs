@@ -3,8 +3,8 @@ ELS = auctex.el init.el install-base.el kone-cc-mode.el menacon-modes.el menacon
 ELCS = $(ELS:.el=.elc)
 
 %.elc: %.el
-	$(EMACS) -Q -batch -L . -f batch-byte-compile $<
+	$(EMACS) -Q -batch -L . -l package -f package-initialize -f batch-byte-compile $<
 
-all: $(ELCS)
+all: $(ELCS) 
 
 .PHONY: all

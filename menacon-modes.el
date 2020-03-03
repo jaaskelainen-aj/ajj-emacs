@@ -143,7 +143,9 @@
   (mc-set-programming-mode java-mode-map))
 
 (defun mc-set-lisp-mode ()
-  (mc-set-programming-mode lisp-mode-map))
+  (mc-set-programming-mode lisp-mode-map)
+  (setq helm-ag-command-option "-G.el$")
+  )
 
 (defun mc-set-js-mode()
   (setq indent-tabs-mode nil)
