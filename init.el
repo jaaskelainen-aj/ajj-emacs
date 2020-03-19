@@ -50,6 +50,7 @@
 (load "menacon-pkg")
 (load "menacon-modes")
 (load "menacon")
+(load "kone")
 (mc-modes-init)
 
 (setq custom-theme-directory "~/ajj-emacs/themes/")

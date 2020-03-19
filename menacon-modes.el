@@ -60,9 +60,8 @@
 
   ;; PHP
   (when (file-directory-p "~/ajj-emacs/ext/php")
-    (load "~/ajj-emacs/ext/php/php-mode-autoloads.el"))
-  
-  )
+    (load "~/ajj-emacs/ext/php/php-mode-autoloads.el"))  
+)
 
 ;; --------------------------------------------------------------------------------
 ;; UTILITY FUNCTIONS
@@ -127,6 +126,11 @@
   )
 
 ;; --------------------------------------------------------------------------------
+(defun mc-set-sh-mode ()
+  (setq fill-column 120)
+  (setq tab-width 2)
+  )
+
 (defun mc-set-txt-mode ()
   (setq fill-column 120)
   (setq tab-width 4)
@@ -154,7 +158,6 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (setq fill-column 120)
-  (message "mc-set-js-mode completed.")
   )
 
 (defun mc-set-json-mode()
@@ -199,10 +202,8 @@
   (setq indent-tabs-mode t)
   (setq tab-width 4)
   (setq fill-column 120)  
-  (setq whitespace-style (quote
-						  (face space-before-tab indentation-tab space-after-tab )))
+  (setq whitespace-style (quote (face space-before-tab indentation-tab space-after-tab )))
   (whitespace-mode)
-  (message "Menacon Python mode completed")
   )
 
 (defun mc-set-php-mode()

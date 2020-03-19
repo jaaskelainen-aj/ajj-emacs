@@ -1,5 +1,5 @@
 EMACS ?= emacs
-ELS = auctex.el init.el install-base.el kone-cc-mode.el menacon-modes.el menacon-pkg.el menacon.el misc-snippets.el
+ELS = auctex.el init.el install-base.el menacon-modes.el menacon-pkg.el menacon.el misc-snippets.el kone.el
 ELCS = $(ELS:.el=.elc)
 
 %.elc: %.el
