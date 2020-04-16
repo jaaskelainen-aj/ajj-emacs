@@ -13,7 +13,7 @@
   (add-hook 'nxml-mode-hook    'mc-set-nxml-mode)
   (add-hook 'sh-mode-hook      'mc-set-sh-mode)
   (add-hook 'python-mode-hook  'mc-set-py-mode)
-  (add-hook 'js-mode-hook      'mc-set-js-mode)
+  (add-hook 'js2-mode-hook     'mc-set-js-mode)
   (add-hook 'json-mode-hook    'mc-set-json-mode)
   (add-hook 'conf-unix-mode-hook 'mc-set-conf-mode)
 
@@ -21,7 +21,10 @@
   (defvaralias 'js-indent-level 'tab-width)
 
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js[x]$\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.?css\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
+  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-to-list 'auto-mode-alist '("\\.?json?\\'" . json-mode))
   (add-to-list 'auto-mode-alist '("\\.txt?\\'" . text-mode))
 
@@ -31,16 +34,11 @@
   ;(add-to-list 'auto-mode-alist '("\\.yaml\\'" . yaml-mode))
   ;(autoload 'csharp-mode "csharp-mod;; e" "Major mode for editing C# code." t)
   ;(setq auto-mode-alist (append '(("\\.cs$" . csharp-mode)) auto-mode-alist))
-  ;(setq auto-mode-alist (cons '("\\.jsx$" . javascript-mode) auto-mode-alist))
   ;(setq auto-mode-alist (cons '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|dita\\)\\'" . nxml-mode) auto-mode-alist))
   ;(setq interpreter-mode-alist (cons '("python" . python-mode) interpreter-mode-alist))
   ;(setq auto-mode-alist (cons '("\\.\\(py\\|cal\\)\\'" . python-mode) auto-mode-alist))
   ;(autoload 'python-mode "python-mode" "Python editing mode." t)
 					; WebMode lists
-  (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.?css\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
 
   ;; (require 'scons-mode)
   ;;- (add-to-list 'auto-mode-alist '("\\SConscript" . scons-mode))
@@ -59,8 +57,8 @@
   (helm-projectile-on)
 
   ;; PHP
-  (when (file-directory-p "~/ajj-emacs/ext/php")
-    (load "~/ajj-emacs/ext/php/php-mode-autoloads.el"))  
+  ;;(when (file-directory-p "~/ajj-emacs/ext/php")
+  ;;  (load "~/ajj-emacs/ext/php/php-mode-autoloads.el"))  
 )
 
 ;; --------------------------------------------------------------------------------
@@ -87,16 +85,18 @@
 				   (substatement-open 0)))
     ))
   
+;; Note: f5 and f6 do not work in current MacOs/Emacs
 (defun mc-set-programming-mode (map)
   "Sets various variables that are useful with programming languages"
   (setq case-fold-search nil)
+  (setq compilation-always-kill t)
+  (setq compilation-ask-about-save nil)
   ;; Offsets
   ;; (c-set-offset 'arglist-intro 'konecc-arglist-indent)
   ;; (c-set-offset 'inher-intro ++)
   ;; (c-set-offset 'substatement-open 0)
   ;; Keys
-  (define-key map [f6]   'next-error)
-  (define-key map [C-f6] 'mc-function-header)
+  (define-key map [S-f4] 'next-error)
   (define-key map [f7]   'compile)
   (define-key map [S-f7] 'prj-compile-c4s)
   (define-key map [C-f7] 'mc-file-header)
@@ -128,6 +128,7 @@
 ;; --------------------------------------------------------------------------------
 (defun mc-set-sh-mode ()
   (setq fill-column 120)
+  (setq indent-tabs-mode nil)
   (setq tab-width 2)
   )
 
@@ -140,7 +141,9 @@
   (c-set-style "KoneCPP")
   (mc-set-programming-mode c-mode-base-map)
   (setq helm-ag-command-option "--cpp")
+  (setq compile-command "./remote-build.sh")
   ;;(setq helm-ag-ignore-buffer-patterns '("\\.js\\'" "\\.mkd\\'"))
+  ;;(message "Menacon cc-mode enabled.")
   )
 
 (defun mc-set-java-mode ()
@@ -154,10 +157,12 @@
 (defun mc-set-js-mode()
   (setq indent-tabs-mode nil)
   (setq case-fold-search nil)
-  (setq web-mode-markup-indent-offset 2)
-  (setq web-mode-css-indent-offset 2)
-  (setq web-mode-code-indent-offset 2)
   (setq fill-column 120)
+  (setq js-indent-level 2)
+  (setq js2-mode-assume-strict t)
+  ;; js2-highlight-level (0-3) default 2
+  (define-key js2-mode-map (kbd "M-g d") '(lambda() (interactive) (insert "document.getElementById();")))
+  (message "Menacon js2-mode initialized.")
   )
 
 (defun mc-set-json-mode()
@@ -183,7 +188,7 @@
 (defun mc-set-html-mode()
   "Menacon html mode extras"
   (setq indent-tabs-mode nil)
-  (setq fill-column 110)  
+  (setq fill-column 110)
   ;(define-key html-helper-mode-map [C-delete] 'mc-remove-right-wspace)
   ;(define-key html-helper-mode-map "\C-c\C-d" 'mc-sgml-del-tag-contents)
   )

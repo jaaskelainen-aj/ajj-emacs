@@ -76,8 +76,10 @@
     (ns-find-file)))
 
 ;; ===============================================================
-;; GLOBAL KEYBOARD DEFINITIONS 
+;; GLOBAL KEYBOARD DEFINITIONS
+;; Note: f5 and f6 do not work in current MacOs/Emacs
 ;; ===============================================================
+
 ; General keys
 (global-set-key [backtab] 'other-window)
 (global-set-key [C-delete] 'mc-remove-right-wspace)
@@ -111,11 +113,10 @@
 (global-set-key [f3] 'mc-prev-buf)
 (global-set-key [C-f3] 'mc-save-kill)
 
-(global-set-key [f4] 'mc-replace)
-(global-set-key [C-f4] 'mc-replace-clear)
-(global-set-key [M-f4] 'mc-replace-swap)
-
-(global-set-key [f5] 'dabbrev-expand)
+(global-set-key [f4] 'dabbrev-expand)
+;S-F4 used in programmin modes
+;(global-set-key [C-f4] 'mc-replace-clear)
+;(global-set-key [M-f4] 'mc-replace-swap)
 
 ; f6 - f8 reserved for modes
 (global-set-key [f9] '(lambda() (interactive)(insert-register ?1 t)))

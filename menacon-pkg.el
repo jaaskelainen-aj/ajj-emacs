@@ -83,10 +83,20 @@
 (define-key global-map (kbd "M-s-l") 'org-store-link)
 
 ;; ------------------------------
+;; JS..HTML/CSS/PHP
+(require 'js2-mode)
+(require 'web-mode)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 4)
+(setq web-mode-enable-auto-pairing t)
+(setq web-mode-enable-css-colorization t)
+(setq web-mode-enable-current-element-highlight t)
+
+;; ------------------------------
 ;; MISC
 (require 'swiper-helm)
 (require 'cff)
-
 
 ;; ------------------------------
 ;;? (load-file "~/.emacs.d/mylib/org-recipes.el")
