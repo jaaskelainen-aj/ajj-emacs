@@ -22,7 +22,7 @@
       helm-allow-mouse                      nil
       )
 
-(define-key global-map (kbd "C-e")     'helm-command-prefix)
+(define-key mc-prefix (kbd "r") 'helm-resume)
 (define-key global-map (kbd "M-s-x")   'helm-M-x)
 (define-key global-map (kbd "M-y")     'helm-show-kill-ring)
 (define-key global-map (kbd "C-x C-f") 'helm-find-files)

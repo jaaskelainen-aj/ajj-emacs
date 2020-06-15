@@ -107,22 +107,22 @@
   ;; Search keys
   (define-key map [C-M-f8] 'cff-find-other-file)
   ;; web server dev macros
-  ;;? (define-key map (kbd "M-g s") '(lambda() (interactive) (insert "\"<<GETS(0x0000)<<\"")))
-  ;;? (define-key map (kbd "M-g p") '(lambda() (interactive) (insert "\"<p>\"<<GETS(0x0000)<<\"</p>\"")))  
-  ;;? (define-key map "\C-cp1"  '(lambda() (interactive) (mc-log-prt 1)))
-  ;;? (define-key map "\C-cp2"  '(lambda() (interactive) (mc-log-prt 2)))
-  ;;? (define-key map "\C-cp3"  '(lambda() (interactive) (mc-log-prt 3)))
-  ;;? (define-key map "\C-cp4"  '(lambda() (interactive) (mc-log-prt 4)))
-  ;;? (define-key map "\C-cp5"  '(lambda() (interactive) (mc-log-prt 5)))
-  ;;? (define-key map "\C-cp6"  '(lambda() (interactive) (mc-log-prt 6)))
-  ;;? (define-key map "\C-cp7"  '(lambda() (interactive) (mc-log-prt 7)))
-  ;;? (define-key map "\C-cv1"  '(lambda() (interactive) (mc-log-vap 1)))
-  ;;? (define-key map "\C-cv2"  '(lambda() (interactive) (mc-log-vap 2)))
-  ;;? (define-key map "\C-cv3"  '(lambda() (interactive) (mc-log-vap 3)))
-  ;;? (define-key map "\C-cv4"  '(lambda() (interactive) (mc-log-vap 4)))
-  ;;? (define-key map "\C-cv5"  '(lambda() (interactive) (mc-log-vap 5)))
-  ;;? (define-key map "\C-cv6"  '(lambda() (interactive) (mc-log-vap 6)))
-  ;;? (define-key map "\C-cv7"  '(lambda() (interactive) (mc-log-vap 7)))
+  (define-key map (kbd "M-g s") '(lambda() (interactive) (insert "\"<<GETS(0x0000)<<\"")))
+  (define-key map (kbd "M-g p") '(lambda() (interactive) (insert "\"<p>\"<<GETS(0x0000)<<\"</p>\"")))  
+  (define-key map "\C-cp1"  '(lambda() (interactive) (mc-log-prt 1)))
+  (define-key map "\C-cp2"  '(lambda() (interactive) (mc-log-prt 2)))
+  (define-key map "\C-cp3"  '(lambda() (interactive) (mc-log-prt 3)))
+  (define-key map "\C-cp4"  '(lambda() (interactive) (mc-log-prt 4)))
+  (define-key map "\C-cp5"  '(lambda() (interactive) (mc-log-prt 5)))
+  (define-key map "\C-cp6"  '(lambda() (interactive) (mc-log-prt 6)))
+  (define-key map "\C-cp7"  '(lambda() (interactive) (mc-log-prt 7)))
+  (define-key map "\C-cv1"  '(lambda() (interactive) (mc-log-vap 1)))
+  (define-key map "\C-cv2"  '(lambda() (interactive) (mc-log-vap 2)))
+  (define-key map "\C-cv3"  '(lambda() (interactive) (mc-log-vap 3)))
+  (define-key map "\C-cv4"  '(lambda() (interactive) (mc-log-vap 4)))
+  (define-key map "\C-cv5"  '(lambda() (interactive) (mc-log-vap 5)))
+  (define-key map "\C-cv6"  '(lambda() (interactive) (mc-log-vap 6)))
+  (define-key map "\C-cv7"  '(lambda() (interactive) (mc-log-vap 7)))
   )
 
 ;; --------------------------------------------------------------------------------
@@ -204,10 +204,11 @@
 
 (defun mc-set-py-mode()
   "Menacon Python mode extras"
-  (setq indent-tabs-mode t)
+  (setq indent-tabs-mode f)
   (setq tab-width 4)
   (setq fill-column 120)  
-  (setq whitespace-style (quote (face space-before-tab indentation-tab space-after-tab )))
+  ;;(setq whitespace-style (quote (face space-before-tab indentation-tab space-after-tab )))
+  
   (whitespace-mode)
   )
 
@@ -216,7 +217,8 @@
   (setq indent-tabs-mode nil)
   (setq fill-column 110)  
   (setq tab-width 4)
-  (setq php-template-compatibility nil)  
+  (setq php-template-compatibility nil)
+  (c-set-offset 'case-label -)
   )
 
 (defun mc-set-conf-mode()

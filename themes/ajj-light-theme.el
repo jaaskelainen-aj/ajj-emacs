@@ -2,7 +2,7 @@
 
 ;; Copyright (C) 2014 Paulik Christoph
 
-;; Author: Christoph Paulik <cpaulik@gmail.com>
+;; Author: AJJ, original Christoph Paulik <cpaulik@gmail.com>
 ;; Keywords: themes
 ;; URL: http://github.com/cpaulik/emacs-material-theme
 ;; Version: 2015
@@ -31,7 +31,7 @@
 
 ;; To use it, put the following in your Emacs configuration file:
 ;;
-;;   (load-theme 'material-light t)
+;;   (load-theme 'ajj-light t)
 ;;
 ;; Requirements: Emacs 24.
 
@@ -42,28 +42,34 @@
 
 ;;; Code:
 
+;; Palette:
+;;   blue #2A72C9  navy #0E407D
+;;   red  #C94B3E
+;;   green #ABC916 dark #6B7D14
+;;   
+
 (deftheme ajj-light
-  "A UI Theme for Emacs based on material design colors")
+  "A UI Theme for Emacs based on material design colors, ")
 (display-color-cells (selected-frame))
 (let* ((class '((class color) (min-colors 89)))
        (256color (eq (display-color-cells (selected-frame)) 256))
        (truecolor (eq (display-color-cells (selected-frame)) 16777216))
 
        (background (if (or window-system truecolor) "#FAFAFA" "#FAFAFA")) ;; sidebar-container
-       (current-line (if (or window-system truecolor)  "#ECEFF1" "#dadada")) ;; tree-row
+       (current-line (if (or window-system truecolor)  "#FFFEA8" "#dadada")) ;; tree-row
        (far-background (if (or window-system truecolor)  "#e0f7fa" "#e0f7fa")) ;; panel-control
        (inactive-gray (if (or window-system truecolor) "#cfd8dc" "#cfd8dc"))
        (header-color (if (or window-system truecolor) "#C8E6C9" "#C8E6C9"))
        (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
-       (selection "#90A4AE") ;; tab-control-dirty-tab-close-button
+       (selection "#C1CDD2") ;; tab-control-dirty-tab-close-button
        (secondary-selection "#bf616a") ;; tab-control-hover-tab-close-button
        (foreground "#212121")
        (comment "#607d8b") ;; table-row
        (red "#B71C1C") ;; tab-control-hover-tab-close-button
        (orange "#FF5722") ;; darker tab-control-dirty-tab-close-butto
        (yellow "#FFA000") ;; tab-control-dirty-tab-close-button
-       (green "#558b2f") ;; complement tab-control-dirty-tab-close-button
-       (aqua "#00796b") ;; lighter complement tab-control-dirty-tab-close-button
+       (green "#6B7D14") ;; complement tab-control-dirty-tab-close-button
+       (aqua "#2A72C9") ;; lighter complement tab-control-dirty-tab-close-button
        (blue "#2196f3") ;; complement tab-control-dirty-tab-close-button
        (purple "#4527A0")) ;; complement tab-control-dirty-tab-close-button
 
@@ -96,86 +102,21 @@
    `(error ((,class (:foreground ,red))))
    `(warning ((,class (:foreground ,orange))))
 
-   ;; ace-window faces
-   `(aw-leading-char-face ((,class (:foreground ,
-                                    background
-                                    :background ,
-                                    green
-                                    :height ,
-                                    1.7
-                                    :weight
-                                    bold))))
+   ;; web-mode faces
+   `(web-mode-current-element-highlight-face ((t (:background "linkColor" :foreground "#ffffff"))))
+   `(web-mode-html-attr-name-face ((t (:foreground "#7F591B"))))
+   `(web-mode-html-attr-value-face ((t (:foreground "#697A1A"))))
+   `(web-mode-html-tag-bracket-face ((t (:foreground "#4B6C94"))))
+   `(web-mode-html-tag-face ((t (:foreground "#3476C7"))))
 
-   ;; ace-jump-faces
-   `(ace-jump-face-foreground ((,class (:foreground ,background
-                                        :background ,green
-                                        :weight bold))))
-
-   `(ace-jump-face-background ((,class (:foreground ,inactive-gray
-                                        :weight normal))))
-
-   ;; ace-jump-mode
-   `(avy-background-face ((,class (:foreground ,inactive-gray
-                                               :weight normal))))
-   `(avy-lead-face-0 ((,class (:foreground ,background
-                                        :background ,green
-                                        :weight bold))))
-   `(avy-lead-face ((,class (:foreground ,background
-                                        :background ,green
-                                        :weight bold))))
-
-   ;; Flycheck
-   `(flycheck-error ((,class (:underline (:style wave :color ,red)))))
-   `(flycheck-info ((,class (:underline (:style wave :color ,blue)))))
-   `(flycheck-warning ((,class (:underline (:style wave :color ,orange)))))
-   `(flycheck-fringe-error ((,class (:foreground ,red :background ,current-line))))
-   `(flycheck-fringe-info ((,class (:foreground ,blue :background ,current-line))))
-   `(flycheck-fringe-warning ((,class (:foreground ,yellow :background ,current-line))))
+   ;; Smerge
+   `(smerge-upper ((t (:background "#E2C4C4"))))
+   `(smerge-lower ((t (:background "#B5C6AB"))))
+   `(smerge-markers ((t (:background "gray90" :foreground "#B34B42"))))
 
    ;; highlight indentation
    `(highlight-indentation-face ((,class (:background, current-line))))
    `(highlight-indentation-current-column-face ((,class (:background, far-background))))
-
-   ;; Flymake
-   `(flymake-warnline ((,class (:underline (:style wave :color ,orange) :background ,background))))
-   `(flymake-errline ((,class (:underline (:style wave :color ,red) :background ,background))))
-
-   ;; Clojure errors
-   `(clojure-test-failure-face ((,class (:background nil :inherit flymake-warnline))))
-   `(clojure-test-error-face ((,class (:background nil :inherit flymake-errline))))
-   `(clojure-test-success-face ((,class (:background nil :foreground nil :underline ,green))))
-   `(clojure-keyword-face ((,class (:inherit font-lock-builtin-face))))
-
-   ;; EDTS errors
-   `(edts-face-warning-line ((t (:background nil :inherit flymake-warnline))))
-   `(edts-face-warning-mode-line ((,class (:background nil :foreground ,orange :weight bold))))
-   `(edts-face-error-line ((t (:background nil :inherit flymake-errline))))
-   `(edts-face-error-mode-line ((,class (:background nil :foreground ,red :weight bold))))
-
-   ;; For Brian Carper's extended clojure syntax table
-   `(clojure-keyword ((,class (:foreground ,yellow))))
-   `(clojure-parens ((,class (:foreground ,foreground))))
-   `(clojure-braces ((,class (:foreground ,green))))
-   `(clojure-brackets ((,class (:foreground ,yellow))))
-   `(clojure-double-quote ((,class (:foreground ,aqua :background nil))))
-   `(clojure-special ((,class (:foreground ,blue))))
-   `(clojure-java-call ((,class (:foreground ,purple))))
-   ;; Rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((,class (:foreground ,"#e91e63"))))
-   `(rainbow-delimiters-depth-2-face ((,class (:foreground ,"#1565C0"))))
-   `(rainbow-delimiters-depth-3-face ((,class (:foreground ,"#EF6C00"))))
-   `(rainbow-delimiters-depth-4-face ((,class (:foreground ,"#B388FF"))))
-   `(rainbow-delimiters-depth-5-face ((,class (:foreground ,"#76ff03"))))
-   `(rainbow-delimiters-depth-6-face ((,class (:foreground ,"#26A69A"))))
-   `(rainbow-delimiters-depth-7-face ((,class (:foreground ,"#B71C1C"))))
-   `(rainbow-delimiters-depth-8-face ((,class (:foreground ,"#795548"))))
-   `(rainbow-delimiters-depth-9-face ((,class (:foreground ,"#827717"))))
-   `(rainbow-delimiters-unmatched-face ((,class (:foreground ,foreground :background ,"#EF6C00"))))
-
-   ;; MMM-mode
-   `(mmm-code-submode-face ((,class (:background ,current-line))))
-   `(mmm-comment-submode-face ((,class (:inherit font-lock-comment-face))))
-   `(mmm-output-submode-face ((,class (:background ,current-line))))
 
    ;; Search
    `(match ((,class (:foreground ,background :background ,green :inverse-video nil))))
@@ -184,37 +125,12 @@
    `(lazy-highlight-face ((,class (:foreground ,background :background ,green :inverse-video nil))))
    `(isearch-fail ((,class (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
-   ;; Evil
-   `(evil-search-highlight-persist-highlight-face ((,class (:foreground ,background
-                                                            :background ,green))))
-   ;; iedit
-   `(iedit-occurrence ((,class (:foreground ,background :background ,green))))
-
-   ;; ahs
-   `(ahs-face ((,class (:foreground ,background :background ,green))))
-   `(ahs-plugin-whole-buffer-face ((,class (:foreground ,foreground :background ,green))))
-
-   ;; Anzu
-   `(anzu-mode-line ((,class (:foreground ,orange))))
-   `(anzu-replace-highlight ((,class (:inherit isearch-lazy-highlight-face))))
-   `(anzu-replace-to ((,class (:inherit isearch))))
-
-   ;; IDO
-   `(ido-subdir ((,class (:foreground ,purple))))
-   `(ido-first-match ((,class (:foreground ,orange))))
-   `(ido-only-match ((,class (:foreground ,green))))
-   `(ido-indicator ((,class (:foreground ,red :background ,background))))
-   `(ido-virtual ((,class (:foreground ,comment))))
-
-   ;; flx-ido
-   `(flx-highlight-face ((,class (:inherit nil :foreground ,yellow :weight bold :underline nil))))
-
    ;; which-function
    `(which-func ((,class (:foreground ,blue :background nil))))
 
    ;; Emacs interface
    `(cursor ((,class (:background ,orange))))
-   `(fringe ((,class (:background ,current-line))))
+   `(fringe ((,class (:background , "#E0E1E2"))))
    `(linum ((,class (:background ,current-line :foreground ,foreground))))
    `(linum-highlight-face ((,class (:background ,current-line :foreground ,foreground))))
    `(border ((,class (:background ,current-line))))
@@ -229,7 +145,7 @@
    `(mode-line-buffer-id ((,class (:foreground ,foreground :background nil :weight bold))))
    `(mode-line-inactive ((,class (:inherit mode-line
                                            :foreground ,subtle
-                                           :background ,current-line
+                                           :background ,"E0E1E2"
                                            :weight normal))))
    `(mode-line-emphasis ((,class (:foreground ,foreground :slant italic))))
    `(mode-line-highlight ((,class (:foreground ,purple :box nil))))

@@ -22,7 +22,7 @@
   (setq shell-file-name "/bin/bash")
   (setq shell-command-switch "-ic")
   (if window-system (progn
-      (set-face-font 'default "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+      (set-face-font 'default "-*-Hack-normal-normal-normal-*-13-*-*-*-m-0-iso10646-1")
       (define-key global-map [ns-drag-file] 'ns-find-file-in-frame)
       (define-key global-map [s-tab] 'next-multiframe-window)
       ;; (global-set-key (kbd "C->") 'previous-multiframe-window)
@@ -41,6 +41,10 @@
      )
     ))
 
+;; Our own prefix, needed by our init packages
+(define-prefix-command 'mc-prefix)
+(global-set-key (kbd "s-m") 'mc-prefix)
+
 ;; See install-base.el also
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
@@ -54,9 +58,9 @@
 (mc-modes-init)
 
 (setq custom-theme-directory "~/ajj-emacs/themes/")
-;;(load-theme 'ajj-light t)
+(load-theme 'ajj-light t)
 
-(add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
+;;(add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
 
 (prefer-coding-system 'utf-8-unix)
 ;(setq auto-coding-alist (cons '("\\.\\(html\\|utf8\\|sql\\|java\\|php\\|sh\\)\\'" . utf-8-unix) auto-coding-alist))
@@ -140,8 +144,6 @@
 ;; ===============================================================
 ;; MENUS
 ;; ===============================================================
-(define-key-after (lookup-key global-map [menu-bar tools]) 
-  [speedbar] '("Speedbar" . speedbar-frame-mode) [calendar])
 
 ;; ===============================================================
 ;; GLOBAL SETTINGS
