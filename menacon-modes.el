@@ -17,11 +17,11 @@
   (add-hook 'json-mode-hook    'mc-set-json-mode)
   (add-hook 'conf-unix-mode-hook 'mc-set-conf-mode)
 
-  (defvaralias 'c-basic-offset 'tab-width)
-  (defvaralias 'js-indent-level 'tab-width)
+  ;;(defvaralias 'c-basic-offset 'tab-width)
+  ;;(defvaralias 'js-indent-level 'tab-width)
 
   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-mode))
   (add-to-list 'auto-mode-alist '("\\.?css\\'" . web-mode))
   (add-to-list 'auto-mode-alist '("\\.robot\\'" . robot-mode))
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
@@ -53,7 +53,7 @@
   (helm-mode 1)
   (global-hl-line-mode)
   (electric-pair-mode)
-  (projectile-global-mode)
+  (projectile-mode)
   (helm-projectile-on)
 
   ;; PHP
@@ -75,7 +75,7 @@
     (c-tab-always-indent        . t)
     (show-trailing-whitespace	. t)
     (indent-tabs-mode           . nil)
-    (c-basic-offset             . 4)
+    (tab-width                  . 4)
     (fill-column		. 85)
     (c-offsets-alist            . ((innamespace . 0)
                                    (inline-open . 0)
@@ -102,10 +102,9 @@
   (define-key map [C-f7] 'mc-file-header)
   (define-key map [M-f7] 'mc-remove-compilation-window)
   (define-key map [f8]   'mc-toggle-source)
+  (define-key map [S-f8] 'helm-projectile-find-other-file)
   (define-key map [C-f8] 'mc-narrow-to-function)
   (define-key map [C-delete] 'mc-remove-right-wspace)
-  ;; Search keys
-  (define-key map [C-M-f8] 'cff-find-other-file)
   ;; web server dev macros
   (define-key map (kbd "M-g s") '(lambda() (interactive) (insert "\"<<GETS(0x0000)<<\"")))
   (define-key map (kbd "M-g p") '(lambda() (interactive) (insert "\"<p>\"<<GETS(0x0000)<<\"</p>\"")))  
@@ -140,8 +139,9 @@
 (defun mc-set-cc-mode ()
   (c-set-style "KoneCPP")
   (mc-set-programming-mode c-mode-base-map)
-  (setq helm-ag-command-option "--cpp")
+  (setq helm-ag-command-option "--cpp --depth15")
   (setq compile-command "./remote-build.sh")
+  
   ;;(setq helm-ag-ignore-buffer-patterns '("\\.js\\'" "\\.mkd\\'"))
   ;;(message "Menacon cc-mode enabled.")
   )
@@ -155,6 +155,7 @@
   )
 
 (defun mc-set-js-mode()
+  (interactive)
   (setq indent-tabs-mode nil)
   (setq case-fold-search nil)
   (setq fill-column 120)
@@ -171,7 +172,8 @@
   (setq tab-width 4)
   (setq js-indent-level 4)
   (setq fill-column 120)
-  )  
+  (setq show-trailing-whitespace t)
+  )
 
 (defun mc-set-sql-mode ()
   "Menacon sql mode settings"
@@ -204,7 +206,7 @@
 
 (defun mc-set-py-mode()
   "Menacon Python mode extras"
-  (setq indent-tabs-mode f)
+  (setq indent-tabs-mode nil)
   (setq tab-width 4)
   (setq fill-column 120)  
   ;;(setq whitespace-style (quote (face space-before-tab indentation-tab space-after-tab )))
@@ -225,3 +227,4 @@
   "Menacon conf mode"
   (setq truncate-lines t)
   )
+;; 

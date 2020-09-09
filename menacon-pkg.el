@@ -3,7 +3,7 @@
 (require 'cc-mode)
 (require 'which-key)
 
-;;(require 'robot-mode)
+(require 'robot-mode)
 
 ;; ------------------------------
 ;; HELM

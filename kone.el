@@ -1,10 +1,37 @@
+(defun kone-desktop-save()
+  "Saves desktop to /Volumes/KONE"
+  (interactive)
+  (desktop-save "/Volumes/KONE/" t)
+  )
+
+(defun kone-desktop-read()
+  "Saves desktop to /Volumes/KONE"
+  (interactive)
+  (desktop-read "/Volumes/KONE/")
+  )
+
 (defun kone-gcparams(ws)
   "Open gcparams from particular workspace a-c"
-  (interactive "cWorkspace (a-c)")
+  (interactive "cWorkspace (a-d)")
   (let (fname)
     (setq fname (format "/Volumes/KONE/ws-%c/kcegc/src/gcparams/gcparams.json" ws))
     (find-file fname)
     )
+  )
+
+(defun kone-sitesnippet(ws)
+  "Open gcparams from particular workspace a-c"
+  (interactive "cWorkspace (a-d)")
+  (let (fname)
+    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/config/pnb118/sitesnippet.conf" ws))
+    (find-file fname)
+    )
+  )
+
+(defun kone-desktop()
+  "Open Kone desktop"
+  (interactive)
+  (desktop-change-dir "/Volumes/KONE/" )
   )
 
 (defun kone-jsonpath()

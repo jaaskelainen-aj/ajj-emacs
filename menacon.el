@@ -43,15 +43,6 @@
   (message "Menacon replace variables swapped")
   )
 
-(defun mc-menacon-el()
-  "Opens menacon.el"
-  (interactive)
-  (find-file "/Users/anttim/Documents/lisp/menacon.el"))
-
-(defun mc-cp-filename()
-  (interactive)
-  (kill-new (buffer-file-name)))
-
 ;; =================================================================================================
 (defun mc-log-prt (level)
   "Inserts log-print message to point"
@@ -81,44 +72,76 @@
 
 
 ;; =================================================================================================
-;; NOT WORKING!
-(defcustom mc-locator-root nil
-  "Sets root directory for the locator filenames"
-  :type '(string))
-
-(defun mc-locate()
+;; MISC Functions
+(defun mc-desktop-save()
+  "Saves desktop to /Volumes/menacon"
   (interactive)
-  (let (fp path_begin path_end)
-    (while (looking-at "[^a-z0-9A-Z\/\.]")
-      (backward-char))
-    (setq path_begin (point))
-    (search-forward ":" (line-end-position) nil)
-    (setq path_end (point))
-    (setq fp (concat mc-locator-root (buffer-substring path_begin path_end)))
-    (message "Found: %s" fp)
-    (find-file-other-window fp)
+  (desktop-save "/Volumes/menacon/" t)
+  )
+
+(defun mc-desktop-read()
+  "Saves desktop to /Volumes/menacon"
+  (interactive)
+  (desktop-read "/Volumes/menacon/")
+  )
+
+(defun mc-mkbp()
+  "Makes a gdb breakpoint to current source code line."
+  (interactive)
+  (let (bpstr)
+    (setq bpstr (concat (buffer-name) ":" (number-to-string (line-number-at-pos))))
+    (message bpstr)
+    (kill-new bpstr))
+  )
+
+(defun mc-cp-path()
+  "Copies buffer path to clipboard"
+  (interactive)
+  (let (bp)
+    (setq bp (concat (buffer-file-name) ":" (number-to-string (line-number-at-pos))))
+    (message bp)
+    (kill-new bp)
     )
   )
 
-;; =================================================================================================
-(defun mc-revert-buildlog()
+(defun mc-goto-path()
+  "Opens path under cursor. See mc-cp-path."
   (interactive)
-  (revert-buffer t t t)
+  (let (bl beg bname lineno)
+    (setq bl (line-beginning-position))
+    (while  (or (looking-at "[^a-z0-9A-Z()/=\&\*<]")
+		(> (point) bl) )
+      (backward-char 1)
+      )
+    (setq beg (point))
+    (search-forward ":")
+    (setq bname (buffer-substring beg (- (point) 1)))
+    ;;(forward-char)
+    (setq beg (point))
+    (while (looking-at "[0-9]")
+      (forward-char)
+      )
+    (setq lineno (string-to-number (buffer-substring beg (point))))
+    (select-window (window-next-sibling))
+    (find-file bname)
+    (goto-char (point-min))
+    (forward-line (- lineno 1))
+    )
   )
-;; ..................................................................................................
+
 (defun mc-prev-buf ()
   "Switches to previous buffer"
   (interactive)
   (switch-to-buffer (other-buffer))
   )
-;; ..................................................................................................
+
 (defun mc-remove-right-wspace()
   (interactive)
   (while (looking-at "[^a-z0-9A-Z()/=\&\*<]")
-	(delete-char 1)
-	)
+    (delete-char 1)
+    )
   )
-;; ..................................................................................................
+
 (defun mc-remove-trailing-M ()
   "Removes the trailing ^M from a file."
   (interactive)
@@ -127,40 +150,37 @@
 	(perform-replace "\^M" "" nil nil nil)
 	(pop-mark))
   )
-;; ..................................................................................................
+
 (defun mc-save-kill ()
   "Normal buffers: Saves the current buffer and kills it. 
    Temprary buffers are simply killed and
    Scratch buffer is changed to previous buffer."
   (interactive)
   (if (string= (buffer-name) "*scratch*")
-	  (switch-to-buffer (other-buffer))
-	(if (char-equal ?* (aref (buffer-name) 0))
-		(progn
-		  (kill-buffer nil)
-		  (delete-window)
-		  )
-	  (save-buffer)
-	  (kill-buffer nil)
-	  )
-	)
+      (switch-to-buffer (other-buffer))
+    (if (char-equal ?* (aref (buffer-name) 0))
+	(kill-buffer nil)
+      (when (buffer-modified-p)
+	(save-buffer))
+      (kill-buffer nil)
+      )
+    )
   )
-;; ..................................................................................................
+
 (defun mc-insert-vtag()
   (interactive)
   (insert "_«V»")
   )
-;; ..................................................................................................
+
 (defun mc-remove-compilation-window()
   "Removes the compilatin window and deletes the compilation buffer"
   (interactive)
   (let (compBuffer)
-	(setq compBuffer (get-buffer "*compilation*")) 
-	(when compBuffer
-	  (delete-windows-on compBuffer)
-	  (kill-buffer compBuffer))))
+    (setq compBuffer (get-buffer "*compilation*")) 
+    (when compBuffer
+      ;;(delete-windows-on compBuffer)
+      (kill-buffer compBuffer)) ))
 
-;; ..................................................................................................
 (defun mc-trim-eol()
   "Trims the end of line from spaces"
   (interactive)
@@ -172,7 +192,6 @@
       (backward-char))
     ))
 
-;; ..................................................................................................
 (defun mc-line-copy-char (&optional b)
   "Copy a character exactly below or above the point
 to the current point of the cursor (default is above)."
@@ -187,7 +206,6 @@ to the current point of the cursor (default is above)."
     (insert s))
   )
 
-;; ..................................................................................................
 (defun mc-match-paren (arg)
   "Go to the matching parenthesis if on parenthesis otherwise insert %."
   (interactive "p")
@@ -195,7 +213,6 @@ to the current point of the cursor (default is above)."
         ((looking-at "\\s\)") (forward-char 1) (backward-list 1))
         (t (message "Match not found!"))))
 
-;; ..................................................................................................
 (defun mc-toggle-source ()
   "Switches to the source buffer if currently in the header buffer and vice versa."
   (interactive)
@@ -236,7 +253,7 @@ to the current point of the cursor (default is above)."
                   (find-file (concat file "." ext))))))
       ) ))
 
-;; ..................................................................................................
+;; ------------------------------------------------------------------------------------------
 (defun mc-attr2cpp (opt)
   "Creates a line of copy constructor. Supposes that the orinal is named 'original'"
   (interactive "N(1=Zero; 2=CopyConst.) ")
@@ -275,36 +292,36 @@ to the current point of the cursor (default is above)."
   "Inserts OutputDebugString -function to the beginning of each function"
   (interactive)
   (save-excursion
-	(goto-char (point-min))
-	(let (lcount)
-	  (setq lcount 1)
-	  (while (not (eq (point) (point-max)))
-		(when (eq (char-after) ?\{)
-		  (forward-char 1)
-		  (insert "\n    OutputDebugString(\"" (buffer-name) " -- ")
-		  (insert (format "%d\\n\");" lcount))
-		  (setq lcount (1+ lcount)))
-		(beginning-of-line 2))
-	  (message (format "%d ODS commands added" lcount)))
-	)
+    (goto-char (point-min))
+    (let (lcount)
+      (setq lcount 1)
+      (while (not (eq (point) (point-max)))
+	(when (eq (char-after) ?\{)
+	  (forward-char 1)
+	  (insert "\n    OutputDebugString(\"" (buffer-name) " -- ")
+	  (insert (format "%d\\n\");" lcount))
+	  (setq lcount (1+ lcount)))
+	(beginning-of-line 2))
+      (message (format "%d ODS commands added" lcount)))
+    )
   )
 
 ;; ..................................................................................................
 (defun mc-ods-remove()
   (interactive)
   (save-excursion
-	(goto-char (point-min))
-	(let (bol lcount)
-	  (setq lcount 1)
-	  (while (search-forward "OutputDebugString" nil t)
-		(beginning-of-line)
-		(setq bol (point))
-		(forward-line 1)
-		(delete-region bol (point))
-		(setq lcount (1+ lcount)))
-	  (message (format "%d ODS commands removed" lcount))
-	  )
-	)
+    (goto-char (point-min))
+    (let (bol lcount)
+      (setq lcount 1)
+      (while (search-forward "OutputDebugString" nil t)
+	(beginning-of-line)
+	(setq bol (point))
+	(forward-line 1)
+	(delete-region bol (point))
+	(setq lcount (1+ lcount)))
+      (message (format "%d ODS commands removed" lcount))
+      )
+    )
   )
 
 ;; ..................................................................................................
@@ -313,12 +330,12 @@ to the current point of the cursor (default is above)."
   (interactive)
   (beginning-of-line)
   (save-excursion 
-	(while (not (= (char-after) ?\n)) ; new line
-	  (when (= (char-after) ?\;) ; semicolon
-		(forward-char 1)
-		(insert "\n"))
-	  (forward-char 1))
-	)
+    (while (not (= (char-after) ?\n)) ; new line
+      (when (= (char-after) ?\;) ; semicolon
+	(forward-char 1)
+	(insert "\n"))
+      (forward-char 1))
+    )
   )
 
 ;; ..................................................................................................
@@ -326,45 +343,45 @@ to the current point of the cursor (default is above)."
   "Connects following lines of text into one long line. Stops at first empty line"
   (interactive)
   (save-excursion
-	(let (contFlag)
-	  (setq contFlag t)
-	  (while contFlag
-		(when (= (char-after) 10)
-		  (delete-char 1)
-		  (when (= (char-after) 10)
-			  (setq contFlag nil)))
-		(forward-char 1))
-	  )))
+    (let (contFlag)
+      (setq contFlag t)
+      (while contFlag
+	(when (= (char-after) 10)
+	  (delete-char 1)
+	  (when (= (char-after) 10)
+	    (setq contFlag nil)))
+	(forward-char 1))
+      )))
 
 ;; ..................................................................................................
 (defun mc-narrow-to-function()
   "Narrows the edit to current C/C++/Java function. Function is determined by searching back to { in position 1."
   (interactive)
   (save-excursion
-	(let (beginPos)
-	  (re-search-backward "^{")
-	  (setq beginPos (point))
-	  (re-search-forward "^}")
-	  (narrow-to-region beginPos (point))
-	  )))
+    (let (beginPos)
+      (re-search-backward "^{")
+      (setq beginPos (point))
+      (re-search-forward "^}")
+      (narrow-to-region beginPos (point))
+      )))
 
 ;; ..................................................................................................
 (defun mc-esc-quotes()
   "Escapes all quotation marks with in region (selection)"
   (interactive)
   (save-excursion
-	(let (beg end)
-	  (setq end (region-end))
-	  (setq beg (region-beginning))
-	  (goto-char beg)
-	  (while (not (equal end (point)))
-		(when (equal (char-after) ?\")
-		  (insert "\\")
-		  (setq end (+ end 1))
-		  )
-		(forward-char 1)
-		)
-	)))
+    (let (beg end)
+      (setq end (region-end))
+      (setq beg (region-beginning))
+      (goto-char beg)
+      (while (not (equal end (point)))
+	(when (equal (char-after) ?\")
+	  (insert "\\")
+	  (setq end (+ end 1))
+	  )
+	(forward-char 1)
+	)
+      )))
 
 ;; ..................................................................................................
 (defun mc-toggle-long-lines()
@@ -377,38 +394,19 @@ to the current point of the cursor (default is above)."
   )
 
 ;; ..................................................................................................
-(defun mc-tab2spaces(count)
-  "Replace tabs with spaces."
-  (interactive "n(number of spaces) ")
-  (setq spaceStr (make-string count ? ))
-  (save-excursion
-	(while (search-forward "\t") 
-	  (delete-char 1)
-	  (insert spaceStr)
-	  )
-  ))
-;; ..................................................................................................
-(defun mc-mkbp()
-  "Makes a gdb breakpoint to current source code line."
-  (interactive)
-  (setq bpstr (concat (buffer-name) ":" (number-to-string (line-number-at-pos))))
-  (message bpstr)
-  (kill-new bpstr)
-  )
-;; ..................................................................................................
 (defun mc-count-chars()
   "Counts the characters within the reguion taking in consideration the escapes."
   (interactive)
   (save-excursion
-	(let (end cntr)
-	  (setq end (region-end))
-	  (setq cntr 0)
-	  (goto-char (region-beginning))
-	  (while (not (equal end (point)))
-		(when (not (equal (char-after) ?\\))
-		  (setq cntr (+ cntr 1)))
-		(forward-char 1))
-	  (message "Number of chars: %d" cntr)))
+    (let (end cntr)
+      (setq end (region-end))
+      (setq cntr 0)
+      (goto-char (region-beginning))
+      (while (not (equal end (point)))
+	(when (not (equal (char-after) ?\\))
+	  (setq cntr (+ cntr 1)))
+	(forward-char 1))
+      (message "Number of chars: %d" cntr)))
   )
 
 ;; =================================================================================================
@@ -470,7 +468,13 @@ to the current point of the cursor (default is above)."
   (set-register 4 nil)
   (message "Register 4 cleared")
   )
-  
+
+(defun mc-select-this-word()
+  "Selects the word under cursor"
+  (interactive)
+  (set-mark (mc-current-word))
+  )
+
 ;; =================================================================================================
 (defvar mc-mark1 nil "Marker for the following functions")
 
@@ -799,81 +803,6 @@ to the current point of the cursor (default is above)."
   )
 
 ;; =================================================================================================
-(defun mc-tcm1()
-  "Replace "
-  (interactive)
-  (save-excursion
-	(let (beg end)
-	  (goto-char (point-min))
-	  (while (search-forward "REQUEST_" (point-max) t)
-		(setq beg (mc-current-word))
-		(setq end (point))
-		(insert "\"")
-		(goto-char beg)
-		(insert "\"")
-		(goto-char (+ end 1))
-		)
-	  (goto-char (point-min))
-	  (while (search-forward "RECEIVE_" (point-max) t)
-		(setq beg (mc-current-word))	  
-		(setq end (point))
-		(insert "\"")
-		(goto-char beg)
-		(insert "\"")	  
-		(goto-char (+ end 1))
-	 	)
-	  )
-	))
-
-(defun mc-util1()
-  "Replace "
-  (interactive)
-  (save-excursion
-	(let (beg end)
-	  (setq end (region-end)) ; (region-end)
-	  (setq beg (region-beginning)) ; (region-beginning)
-	  (goto-char beg)
-	  (while (search-forward "Naisten telinevoimistelu" end t)
-		(setq end (- end 21))
-		(replace-match "NTV" t))
-	  (goto-char beg)
-	  (while (search-forward "Näytösvoimistelu" end t)
-		(setq end (- end 14))
-		(replace-match "NV" t))
-	  (goto-char beg)
-	  (while (search-forward "Rytminen voimistelu" end t)
-		(setq end (- end 17))
-		(replace-match "RV" t))
-	  (goto-char beg)
-	  (while (search-forward "luokka" end t)
-		(setq end (- end 4))
-		(replace-match "lk" t))
-	  (goto-char beg)
-	  (while (search-forward "Trampoliinivoimistelu" end t)
-		(setq end (- end 4))
-		(replace-match "TRA" t))
-	  (goto-char beg)
-	  (while (search-forward "\n" end t)
-		(setq end (- end 4))
-		(replace-match " + " t))
-	  )
-	))
-
-(defun mc-port-mclib()
-  "Port known mclib changes "
-  (interactive)
-  (save-excursion
-	(let (beg end)
-	  (setq end (point-max)) ; (region-end)
-	  (setq beg (point-min)) ; (region-beginning)
-	  (goto-char beg)
-	  (while (search-forward "MCLinkedObject" end t)
-		(replace-match "mclib::LinkedObject" t))
-	  (goto-char beg)
-	  (while (search-forward "MCLinkedList" end t)
-		(replace-match "mclib::LinkedList" t))
-	)))
-
 (defun mc-c4s-frame()
   "Create c4s program frame"
   (interactive)
@@ -913,38 +842,3 @@ to the current point of the cursor (default is above)."
 	(forward-char 1)
 	)
   )
-
-(defun officetime()
-  "Cleans up OfficeTime report"
-  (interactive)
-  (if (use-region-p)
-	  (let (beg end)
-		(setq end (region-end)) ; (region-end)
-		(setq beg (region-beginning)) ; (region-beginning)
-		(goto-char beg)
-		(while(> (- end beg) 20)
-		  (end-of-line)
-		  (search-backward "\t")
-		  (forward-char 1)
-		  (setq end (- end (- (point) beg)))
-		  (kill-region beg (point))
-		  (end-of-line)
-		  (delete-char 1)
-		  (insert "; ")
-		  (setq beg (point))
-		))
-	(message "Region not defined")
-	))
-
-  
-;(defun mc-util3 ()
-;  "Replace the old file header."
-;  (interactive)
-;  (goto-char (point-min))
-;  (kill-line 5)
-;  (insert "/*******************************************************************************\n")
-;  (insert (buffer-name))
-;  (insert "\nCopyright (c) Antti Merenluoto\n")
-;  (insert "*******************************************************************************/\n")
-;  (save-buffer)
-;  )

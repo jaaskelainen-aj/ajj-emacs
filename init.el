@@ -33,7 +33,6 @@
       (setq mouse-wheel-progressive-speed nil)
       (setq server-socket-dir "~/.emacs.d/")
       (server-start)
-      (require 'sourcetrail)
       )
     ;;else
     (
@@ -99,6 +98,7 @@
 (global-set-key (kbd "<s-return>") 'overwrite-mode)
 (global-set-key (kbd "M-s-a") 'helm-ag)
 (global-set-key (kbd "M-s-s") 'swiper-helm)
+(global-set-key (kbd "C-=") 'mc-select-this-word)
 
 (global-set-key "\M-n" 'other-window)
 (global-set-key "\C-\M-\\" 'indent-region)
@@ -111,11 +111,13 @@
 
 ;Function keys
 (global-set-key [f2] 'mc-match-paren)
-(global-set-key [C-f2] 'query-replace)
+(global-set-key [S-f2] 'helm-ag-project-root)
+(global-set-key [C-f2] 'helm-projectile-find-file-in-known-projects)
 (global-set-key [M-f2] 'query-replace-regexp)
 
 (global-set-key [f3] 'mc-prev-buf)
 (global-set-key [C-f3] 'mc-save-kill)
+(global-set-key [M-f3] '(lambda() (interactive) (revert-buffer nil t t)))
 
 (global-set-key [f4] 'dabbrev-expand)
 ;S-F4 used in programmin modes
@@ -171,6 +173,28 @@
   ;;
   compilation-scroll-output t
   )
+
+(custom-set-variables
+ '(speedbar-default-position (quote right))
+ '(speedbar-directory-button-trim-method (quote trim))
+ '(speedbar-frame-parameters
+   (quote
+    ((minibuffer)
+     (width . 30)
+     (border-width . 0)
+     (menu-bar-lines . 0)
+     (tool-bar-lines . 0)
+     (unsplittable . t)
+     (left-fringe . 0))))
+ '(speedbar-indentation-width 2)
+ '(speedbar-obj-do-check nil)
+ '(speedbar-select-frame-method (quote attached))
+ '(speedbar-show-unknown-files t)
+ '(speedbar-sort-tags nil)
+ '(speedbar-track-mouse-flag nil)
+ '(speedbar-use-tool-tips-flag nil)
+ '(speedbar-vc-do-check t)
+ )
 
 (setq-default fill-column 120)
 (setq-default show-paren-mode 1)
