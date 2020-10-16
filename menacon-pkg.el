@@ -1,8 +1,11 @@
+(eval-when-compile
+  (require 'package)
+  (package-initialize)
+  )
+
 (require 'align)
 (require 'paren)
 (require 'cc-mode)
-(require 'which-key)
-
 (require 'robot-mode)
 
 ;; ------------------------------
@@ -61,9 +64,11 @@
 (setq helm-ag-use-agignore t)
 (make-variable-buffer-local 'helm-ag-command-option)
 
+(define-key global-map (kbd "s-a") 'helm-ag)
 (define-key global-map (kbd "C-f") 'helm-ag-this-file)
 (define-key global-map (kbd "M-f") 'helm-do-ag)
-(define-key global-map (kbd "M-s-f") 'helm-do-ag-project-root)
+(define-key global-map (kbd "S-<f2>") 'helm-ag-project-root)
+
 
 ;; ------------------------------
 ;; PROJECTILE
@@ -97,6 +102,9 @@
 ;; MISC
 (require 'swiper-helm)
 (require 'cff)
+
+(require 'whitespace)
+(setq whitespace-line-column nil)
 
 ;; ------------------------------
 ;;? (load-file "~/.emacs.d/mylib/org-recipes.el")

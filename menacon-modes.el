@@ -16,6 +16,7 @@
   (add-hook 'js2-mode-hook     'mc-set-js-mode)
   (add-hook 'json-mode-hook    'mc-set-json-mode)
   (add-hook 'conf-unix-mode-hook 'mc-set-conf-mode)
+  (add-hook 'robot-mode-hook   'mc-set-robot-mode)
 
   ;;(defvaralias 'c-basic-offset 'tab-width)
   ;;(defvaralias 'js-indent-level 'tab-width)
@@ -227,4 +228,14 @@
   "Menacon conf mode"
   (setq truncate-lines t)
   )
+
+(defun mc-set-robot-mode()
+  (setq tab-width 4)
+  (define-key robot-mode-map (kbd "<backtab>") '(lambda() (interactive) (insert "    ")))
+  (setq fill-column 140)
+  (whitespace-mode)
+  
+  ;;(message "Menacon robot mode set.")
+  )
+
 ;; 

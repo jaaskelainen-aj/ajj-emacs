@@ -96,7 +96,6 @@
 (global-set-key (kbd "M-<down>") 'c-end-of-defun)
 (global-set-key (kbd "s-r") 'copy-to-register)
 (global-set-key (kbd "<s-return>") 'overwrite-mode)
-(global-set-key (kbd "M-s-a") 'helm-ag)
 (global-set-key (kbd "M-s-s") 'swiper-helm)
 (global-set-key (kbd "C-=") 'mc-select-this-word)
 
@@ -111,9 +110,9 @@
 
 ;Function keys
 (global-set-key [f2] 'mc-match-paren)
-(global-set-key [S-f2] 'helm-ag-project-root)
 (global-set-key [C-f2] 'helm-projectile-find-file-in-known-projects)
 (global-set-key [M-f2] 'query-replace-regexp)
+; S-f2 reserved for helm-ag
 
 (global-set-key [f3] 'mc-prev-buf)
 (global-set-key [C-f3] 'mc-save-kill)
