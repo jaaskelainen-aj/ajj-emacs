@@ -11,7 +11,7 @@
   )
 
 (defun kone-gcparams(ws)
-  "Open gcparams from particular workspace a-c"
+  "Open gcparams from particular workspace a-d"
   (interactive "cWorkspace (a-d)")
   (let (fname)
     (setq fname (format "/Volumes/KONE/ws-%c/kcegc/src/gcparams/gcparams.json" ws))
@@ -20,10 +20,19 @@
   )
 
 (defun kone-sitesnippet(ws)
-  "Open gcparams from particular workspace a-c"
+  "Open gcparams from particular workspace a-d"
   (interactive "cWorkspace (a-d)")
   (let (fname)
     (setq fname (format "/Volumes/KONE/ws-%c/kcegc/config/pnb118/sitesnippet.conf" ws))
+    (find-file fname)
+    )
+  )
+
+(defun kone-wsnotes(ws)
+  "Open notes from workspace a-d"
+  (interactive "cWorkspace (a-d)")
+  (let (fname)
+    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/kone-ajjnotes.txt" ws))
     (find-file fname)
     )
   )

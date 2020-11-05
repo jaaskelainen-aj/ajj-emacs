@@ -109,6 +109,8 @@
 (global-set-key (kbd "s-<") '(lambda() (interactive)(insert "«")))
 
 ;Function keys
+(global-set-key [C-f1] '(lambda()(interactive) (point-to-register ?5)) )
+(global-set-key [S-f1] '(lambda()(interactive) (jump-to-register ?5)) )
 (global-set-key [f2] 'mc-match-paren)
 (global-set-key [C-f2] 'helm-projectile-find-file-in-known-projects)
 (global-set-key [M-f2] 'query-replace-regexp)
