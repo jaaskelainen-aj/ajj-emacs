@@ -135,7 +135,11 @@
    `(mode-line-inactive ((,class (:inherit mode-line :background , d-blue))))
    `(mode-line-emphasis ((,class (:foreground ,purple :slant italic))))
    `(mode-line-highlight ((,class (:foreground ,purple :box nil))))
+
    `(custom-face-tag ((,class (:foreground ,gray :weight bold))))
+   `(custom-group-tag ((t (:foreground ,gray :weight bold))))
+   `(custom-variable-obsolete ((t (:foreground ,l-gray))))
+   `(custom-variable-tag ((t (:foreground ,gray :weight bold))))
 
    ;; web-mode faces
    `(web-mode-current-element-highlight-face ((t (:background "linkColor" :foreground "#ffffff"))))
@@ -167,7 +171,7 @@
    ;; Search
    `(match ((,class (:foreground ,background :background ,green :inverse-video nil))))
    `(isearch ((,class (:foreground ,foreground :background ,l-green))))
-   `(lazy-highlight ((,class (:foreground ,foreground :background ,l-green :inverse-video nil))))
+   `(lazy-highlight ((,class (:foreground ,foreground :background ,l2-green :inverse-video nil))))
    `(isearch-fail ((,class (:background ,background :inherit font-lock-warning-face :inverse-video t))))
 
    ;; which-function
@@ -328,6 +332,7 @@
    `(magit-sequence-part ((t (:foreground ,yellow))))
    `(magit-sequence-head ((t (:foreground ,blue))))
    `(magit-sequence-drop ((t (:foreground ,red))))
+   `(magit-cherry-unmatched ((t (:foreground "systemTealColor"))))
 
    ;; git-gutter
    `(git-gutter:modified ((,class (:foreground ,purple :weight bold))))
@@ -351,6 +356,7 @@
    `(compilation-mode-line-exit ((,class (:foreground ,green))))
    `(compilation-mode-line-fail ((,class (:foreground ,red))))
    `(compilation-mode-line-run ((,class (:foreground ,blue))))
+   `(compilation-info ((t (:foreground ,green))))
 
    ;; Grep
    `(grep-context-face ((,class (:foreground ,comment))))
@@ -451,17 +457,13 @@
    `(org-level-8 ((,class (:inherit outline-8 ))))
    `(org-level-9 ((,class (:inherit outline-9 ))))
 
-   `(markdown-header-face-1 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.3 ))))
-   `(markdown-header-face-2 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.2 ))))
-   `(markdown-header-face-3 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-face-4 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-face-5 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-face-6 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-face-7 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-face-8 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-face-9 ((,class (:inherit font-lock-function-name-face :weight bold :height 1.1 ))))
-   `(markdown-header-delimiter-face ((,class (:inherit font-lock-function-name-face :weight bold
-                                              :height 1.2))))
+   `(markdown-code-face ((t (:foreground "#457b9d"))))
+   `(markdown-header-delimiter-face ((t (:foreground "#a8dadc" :weight bold :height 1.1))))
+   `(markdown-header-face-2 ((t (:inherit font-lock-function-name-face :weight bold :height 1.1))))
+   `(markdown-header-face-3 ((t (:inherit font-lock-function-name-face :weight normal :height 1.1))))
+   `(markdown-header-face-4 ((t (:inherit font-lock-function-name-face :weight normal :height 1.0))))
+   `(markdown-list-face ((t (:inherit font-lock-variable-name-face))))
+   `(markdown-pre-face ((t (:inherit markdown-code-face))))
    `(markdown-url-face ((,class (:inherit link))))
    `(markdown-link-face ((,class (:foreground ,blue :underline t))))
 

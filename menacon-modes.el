@@ -17,6 +17,7 @@
   (add-hook 'json-mode-hook    'mc-set-json-mode)
   (add-hook 'conf-unix-mode-hook 'mc-set-conf-mode)
   (add-hook 'robot-mode-hook   'mc-set-robot-mode)
+  (add-hook 'logview-mode-hook 'mc-set-log-mode)
 
   ;;(defvaralias 'c-basic-offset 'tab-width)
   ;;(defvaralias 'js-indent-level 'tab-width)
@@ -51,11 +52,9 @@
 
   ;; Turn global modes on
   (show-paren-mode)
-  (helm-mode 1)
   (global-hl-line-mode)
   (electric-pair-mode)
   (projectile-mode)
-  (helm-projectile-on)
 
   ;; PHP
   ;;(when (file-directory-p "~/ajj-emacs/ext/php")
@@ -103,7 +102,7 @@
   (define-key map [C-f7] 'mc-file-header)
   (define-key map [M-f7] 'mc-remove-compilation-window)
   (define-key map [f8]   'mc-toggle-source)
-  (define-key map [S-f8] 'helm-projectile-find-other-file)
+  (define-key map [S-f8] 'projectile-find-other-file)
   (define-key map [C-f8] 'mc-narrow-to-function)
   (define-key map [C-delete] 'mc-remove-right-wspace)
   ;; web server dev macros
@@ -140,10 +139,7 @@
 (defun mc-set-cc-mode ()
   (c-set-style "KoneCPP")
   (mc-set-programming-mode c-mode-base-map)
-  (setq helm-ag-command-option "--cpp --depth15")
   (setq compile-command "./remote-build.sh")
-  
-  ;;(setq helm-ag-ignore-buffer-patterns '("\\.js\\'" "\\.mkd\\'"))
   ;;(message "Menacon cc-mode enabled.")
   )
 
@@ -152,7 +148,6 @@
 
 (defun mc-set-lisp-mode ()
   (mc-set-programming-mode lisp-mode-map)
-  (setq helm-ag-command-option "-G.el$")
   )
 
 (defun mc-set-js-mode()
@@ -238,4 +233,8 @@
   ;;(message "Menacon robot mode set.")
   )
 
+(defun mc-set-log-mode()
+  (setq tab-width 4)
+  (setq truncate-lines t)
+  )  
 ;; 

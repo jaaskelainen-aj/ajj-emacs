@@ -2,3 +2,5 @@
 *.cpp
 *.el~
 .attic
+elmake
+pkg
