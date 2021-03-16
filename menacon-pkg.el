@@ -26,17 +26,21 @@
 (setq magit-diff-use-overlays nil)
 
 ;; --
-;; AG
+;; AG (depends on 's'-package)
+(require 's)
 (require 'ag)
 (setq ag-highlight-search t)
-(setq ag-reuse-buffers 't)
-(define-key global-map (kbd "s-a") 'ag)
+(setq ag-reuse-buffers nil)
+(setq ag-group-matches nil)
+(define-key global-map (kbd "s-a") 'ag-regexp)
+(define-key global-map (kbd "s-s") 'ag-project-regexp)
+(define-key global-map (kbd "s-f") 'ag-g-project)
 
 ;; ------------------------------
 ;; PROJECTILE
 (require 'projectile)
-;;-- (define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
-;;-- (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (setq projectile-indexing-method 'alien
       projectile-enable-caching t
       projectile-switch-project-action 'projectile-find-file
@@ -65,8 +69,16 @@
 ;; MISC
 (require 'cff)
 
+(require 'clang-format)
+; Set locally: (setq clang-format-executable "/opt/local/bin/clang-format-mp-9.0")
+
 (require 'whitespace)
 (setq whitespace-line-column nil)
+
+(require 'fill-column-indicator)
+(setq fci-rule-width 1)
+(setq fci-rule-use-dashes t)
+;; set color in theme (setq fci-rule-color "#303030")
 
 ;; ------------------------------
 ;;? (load-file "~/.emacs.d/mylib/org-recipes.el")

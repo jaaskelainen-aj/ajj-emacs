@@ -49,16 +49,16 @@
        (256color  (eq (display-color-cells (selected-frame)) 256))
        (truecolor (eq (display-color-cells (selected-frame)) 16777216))
 
-       (background (if (or window-system truecolor) "#1A3549" "#262626")) ;; sidebar-container
-       (current-line (if (or window-system truecolor)  "#2B4456" "#3a3a3a")) ;; tree-row
-       (far-background (if (or window-system truecolor)  "#1c1f26" "#121212")) ;; panel-control
-       (modeline-background (if (or window-system truecolor) "#8093A2" "#121212"))
-       (inactive-gray (if (or window-system truecolor) "#78909c" "#8a8a8a"))
-       (header-color (if (or window-system truecolor) "#455A64" "#5f5f5f"))
+       (background "#0A1B2A")
+       (current-line "#1A3549")
+       (far-background "#1c1f26")
+       (modeline-background "#8093A2")
+       (inactive-gray "#78909c")
+       (header-color "#455A64")
        (subtle "#a7adba") ;; tree-row-hover-disclosure-button-control
        (selection "#B4A063") ;; tab-control-dirty-tab-close-button
        (secondary-selection "#bf616a") ;; tab-control-hover-tab-close-button
-       (foreground "#ffffff")
+       (foreground "#f0f0f0")
        (comment "#b0bec5") ;; table-row
        (red "#f36c60") ;; tab-control-hover-tab-close-button
        (orange "#ff9800") ;; darker tab-control-dirty-tab-close-butto
@@ -97,34 +97,6 @@
    `(error ((,class (:foreground ,red))))
    `(warning ((,class (:foreground ,orange))))
 
-   ;; ace-window faces
-   `(aw-leading-char-face ((,class (:foreground ,
-                                    foreground
-                                    :background ,
-                                    "#ef6c00"
-                                    :height ,
-                                    1.7
-                                    :weight
-                                    bold))))
-
-   ;; ace-jump-faces
-   `(ace-jump-face-foreground ((,class (:foreground ,foreground
-                                        :background ,"#ef6c00"
-                                        :weight bold))))
-
-   `(ace-jump-face-background ((,class (:foreground ,inactive-gray
-                                        :weight normal))))
-
-   ;; avy-jump-mode
-   `(avy-background-face ((,class (:foreground ,inactive-gray
-                                   :weight normal))))
-   `(avy-lead-face-0 ((,class (:foreground ,foreground
-                               :background ,"#ef6c00"
-                                        :weight bold))))
-   `(avy-lead-face ((,class (:foreground ,foreground
-                             :background ,"#ef6c00"
-                             :weight bold))))
-
    ;; Flycheck
    `(flycheck-error ((,class (:underline (:style wave :color ,red)))))
    `(flycheck-warning ((,class (:underline (:style wave :color ,orange)))))
@@ -133,47 +105,11 @@
    `(highlight-indentation-face ((,class (:background, current-line))))
    `(highlight-indentation-current-column-face ((,class (:background, far-background))))
 
-   ;; Flymake
-   `(flymake-warnline ((,class (:underline (:style wave :color ,orange) :background ,background))))
-   `(flymake-errline ((,class (:underline (:style wave :color ,red) :background ,background))))
-
-   ;; Clojure errors
-   `(clojure-test-failure-face ((,class (:background nil :inherit flymake-warnline))))
-   `(clojure-test-error-face ((,class (:background nil :inherit flymake-errline))))
-   `(clojure-test-success-face ((,class (:background nil :foreground nil :underline ,green))))
-   `(clojure-keyword-face ((,class (:inherit font-lock-builtin-face))))
-
    ;; EDTS errors
    `(edts-face-warning-line ((t (:background nil :inherit flymake-warnline))))
    `(edts-face-warning-mode-line ((,class (:background nil :foreground ,orange :weight bold))))
    `(edts-face-error-line ((t (:background nil :inherit flymake-errline))))
    `(edts-face-error-mode-line ((,class (:background nil :foreground ,red :weight bold))))
-
-   ;; For Brian Carper's extended clojure syntax table
-   `(clojure-keyword ((,class (:foreground ,yellow))))
-   `(clojure-parens ((,class (:foreground ,foreground))))
-   `(clojure-braces ((,class (:foreground ,green))))
-   `(clojure-brackets ((,class (:foreground ,yellow))))
-   `(clojure-double-quote ((,class (:foreground ,aqua :background nil))))
-   `(clojure-special ((,class (:foreground ,blue))))
-   `(clojure-java-call ((,class (:foreground ,purple))))
-
-   ;; Rainbow-delimiters
-   `(rainbow-delimiters-depth-1-face ((,class (:foreground ,"#e91e63"))))
-   `(rainbow-delimiters-depth-2-face ((,class (:foreground ,"#2196F3"))))
-   `(rainbow-delimiters-depth-3-face ((,class (:foreground ,"#EF6C00"))))
-   `(rainbow-delimiters-depth-4-face ((,class (:foreground ,"#B388FF"))))
-   `(rainbow-delimiters-depth-5-face ((,class (:foreground ,"#76ff03"))))
-   `(rainbow-delimiters-depth-6-face ((,class (:foreground ,"#26A69A"))))
-   `(rainbow-delimiters-depth-7-face ((,class (:foreground ,"#FFCDD2"))))
-   `(rainbow-delimiters-depth-8-face ((,class (:foreground ,"#795548"))))
-   `(rainbow-delimiters-depth-9-face ((,class (:foreground ,"#DCE775"))))
-   `(rainbow-delimiters-unmatched-face ((,class (:foreground ,foreground :background ,"#EF6C00"))))
-
-   ;; MMM-mode
-   `(mmm-code-submode-face ((,class (:background ,current-line))))
-   `(mmm-comment-submode-face ((,class (:inherit font-lock-comment-face))))
-   `(mmm-output-submode-face ((,class (:background ,current-line))))
 
    ;; Search
    `(match ((,class (:foreground ,background :background ,green :inverse-video nil))))
@@ -185,28 +121,6 @@
    ;; Evil
    `(evil-search-highlight-persist-highlight-face ((,class (:foreground ,background
                                                             :background ,green))))
-   ;; iedit
-   `(iedit-occurrence ((,class (:foreground ,background :background ,green))))
-
-   ;; ahs
-   `(ahs-face ((,class (:foreground ,background :background ,green))))
-   `(ahs-plugin-whole-buffer-face ((,class (:foreground ,foreground :background ,green))))
-
-   ;; Anzu
-   `(anzu-mode-line ((,class (:foreground ,orange))))
-   `(anzu-replace-highlight ((,class (:inherit isearch-lazy-highlight-face))))
-   `(anzu-replace-to ((,class (:inherit isearch))))
-
-   ;; IDO
-   `(ido-subdir ((,class (:foreground ,purple))))
-   `(ido-first-match ((,class (:foreground ,orange))))
-   `(ido-only-match ((,class (:foreground ,green))))
-   `(ido-indicator ((,class (:foreground ,red :background ,background))))
-   `(ido-virtual ((,class (:foreground ,comment))))
-
-   ;; flx-ido
-   `(flx-highlight-face ((,class (:inherit nil :foreground ,yellow :weight bold :underline nil))))
-
    ;; which-function
    `(which-func ((,class (:foreground ,blue :background nil))))
 
@@ -233,8 +147,8 @@
 
    `(header-line ((,class (:inherit mode-line :foreground ,purple :background nil))))
 
-   `(trailing-whitespace ((,class (:foreground ,red :inverse-video t :underline nil))))
-   `(whitespace-trailing ((,class (:foreground ,red :inverse-video t :underline nil))))
+   `(trailing-whitespace ((,class (:foreground ,"#5F321D" :inverse-video t :underline nil))))
+   `(whitespace-trailing ((,class (:foreground ,"#5F321D" :inverse-video t :underline nil))))
    `(whitespace-space-after-tab ((,class (:foreground ,red :inverse-video t :underline nil))))
    `(whitespace-space-before-tab ((,class (:foreground ,red :inverse-video t :underline nil))))
    `(whitespace-empty ((,class (:foreground ,red :inverse-video t :underline nil))))
@@ -439,11 +353,6 @@
    `(helm-candidate-number ((,class (:foreground ,foreground :background ,"#ef6c00"))))
    `(helm-source-header ((,class (:background ,header-color :foreground ,"#eceff1" :height 1.3 :bold t ))))
 
-   ;; guide-key
-   `(guide-key/key-face ((,class (:foreground ,foreground ))))
-   `(guide-key/highlight-command-face ((,class (:foreground ,yellow ))))
-   `(guide-key/prefix-command-face ((,class (:foreground ,aqua ))))
-
    ;; which-key
    `(which-key-key-face ((,class (:foreground ,foreground  :weight bold))))
    `(which-key-special-key-face ((,class (:foreground ,orange  :weight bold :height 1.1))))
@@ -527,11 +436,6 @@
    ;; Python-specific overrides
    `(py-builtins-face ((,class (:foreground ,"#ff7043" :weight normal))))
 
-   ;; ein (emacs-ipython-notebook) specific colors
-   `(ein:cell-input-area ((,class (:background ,"#1e2930"))))
-   `(ein:cell-input-prompt ((,class (:inherit org-block-begin-line))))
-   `(ein:cell-output-prompt ((,class (:inherit org-block-end-line))))
-
    ;; js2-mode
    `(js2-warning ((,class (:underline ,orange))))
    `(js2-error ((,class (:foreground nil :underline ,red))))
@@ -553,16 +457,6 @@
    `(js3-instance-member-face ((,class (:foreground ,blue))))
    `(js3-private-function-call-face ((,class (:foreground ,red))))
 
-   ;; coffee-mode
-   `(coffee-mode-class-name ((,class (:foreground ,orange :weight bold))))
-   `(coffee-mode-function-param ((,class (:foreground ,purple))))
-
-   ;; elixir-mode
-   `(elixir-negation-face ((,class (:foreground ,red))))
-   `(elixir-attribute-face ((,class (:foreground ,purple))))
-   `(elixir-atom-face ((,class (:foreground ,aqua))))
-   `(elixir-ignored-var-face ((,class (:foreground ,comment))))
-
    ;; nxml
    `(nxml-name-face ((,class (:foreground unspecified :inherit font-lock-constant-face))))
    `(nxml-attribute-local-name-face ((,class (:foreground unspecified :inherit font-lock-variable-name-face))))
@@ -570,15 +464,6 @@
    `(nxml-delimiter-face ((,class (:foreground unspecified :inherit font-lock-keyword-face))))
    `(nxml-delimited-data-face ((,class (:foreground unspecified :inherit font-lock-string-face))))
    `(rng-error-face ((,class (:underline ,red))))
-
-   ;; RHTML
-   `(erb-delim-face ((,class (:background ,current-line))))
-   `(erb-exec-face ((,class (:background ,current-line :weight bold))))
-   `(erb-exec-delim-face ((,class (:background ,current-line))))
-   `(erb-out-face ((,class (:background ,current-line :weight bold))))
-   `(erb-out-delim-face ((,class (:background ,current-line))))
-   `(erb-comment-face ((,class (:background ,current-line :weight bold :slant italic))))
-   `(erb-comment-delim-face ((,class (:background ,current-line))))
 
    ;; Message-mode
    `(message-header-other ((,class (:foreground nil :background nil :weight normal))))
@@ -588,76 +473,6 @@
    `(message-header-name ((,class (:foreground ,blue :background nil))))
    `(message-header-newsgroups ((,class (:foreground ,aqua :background nil :slant normal))))
    `(message-separator ((,class (:foreground ,purple))))
-
-   ;; cfw emacs calendar
-   `(cfw:face-title ((,class (:background ,background :foreground ,"#eceff1" :height 1.3 :weight bold))))
-   `(cfw:face-today ((,class (:foreground ,foreground))))
-   `(cfw:face-day-title ((,class (:background ,current-line :foreground ,foreground))))
-   `(cfw:face-today-title ((,class (:background ,secondary-selection :foreground ,foreground))))
-   `(cfw:face-header ((,class (:background ,current-line :foreground ,foreground))))
-   `(cfw:face-sunday ((,class (:background ,current-line :foreground ,aqua :weight bold))))
-   `(cfw:face-saturday ((,class (:background ,current-line :foreground ,aqua :weight bold))))
-   `(cfw:face-select ((,class (:background ,selection :foreground ,foreground))))
-   `(cfw:face-toolbar ((,class (:background ,aqua :foreground ,background :weight bold))))
-   `(cfw:face-toolbar-button-off ((,class (:background ,aqua :foreground ,background :weight bold))))
-   `(cfw:face-toolbar-button-on ((,class (:background ,aqua :foreground ,secondary-selection :weight bold))))
-   `(cfw:face-holiday ((,class (:background ,current-line :foreground ,green :weight bold))))
-
-   ;; Jabber
-   `(jabber-chat-prompt-local ((,class (:foreground ,yellow))))
-   `(jabber-chat-prompt-foreign ((,class (:foreground ,orange))))
-   `(jabber-chat-prompt-system ((,class (:foreground ,yellow :weight bold))))
-   `(jabber-chat-text-local ((,class (:foreground ,yellow))))
-   `(jabber-chat-text-foreign ((,class (:foreground ,orange))))
-   `(jabber-chat-text-error ((,class (:foreground ,red))))
-
-   `(jabber-roster-user-online ((,class (:foreground ,green))))
-   `(jabber-roster-user-xa ((,class :foreground ,comment)))
-   `(jabber-roster-user-dnd ((,class :foreground ,yellow)))
-   `(jabber-roster-user-away ((,class (:foreground ,orange))))
-   `(jabber-roster-user-chatty ((,class (:foreground ,purple))))
-   `(jabber-roster-user-error ((,class (:foreground ,red))))
-   `(jabber-roster-user-offline ((,class (:foreground ,comment))))
-
-   `(jabber-rare-time-face ((,class (:foreground ,comment))))
-   `(jabber-activity-face ((,class (:foreground ,purple))))
-   `(jabber-activity-personal-face ((,class (:foreground ,aqua))))
-
-   ;; Company autocomplete
-   ;; `(company-echo ((,class ())))
-   ;; `(company-echo-common ((,class ())))
-
-   `(company-preview ((,class (:foreground ,comment :background ,inactive-gray))))
-   `(company-preview-common ((,class (:foreground ,comment :background ,inactive-gray)))) ; same background as highlight-line
-   ;; `(company-preview-search ((,class ())))
-   `(company-scrollbar-bg ((,class (:background "#F0F0F0"))))
-   `(company-scrollbar-fg ((,class (:background "#C0C0C0"))))
-   `(company-template-field ((,class (:background ,inactive-gray))))
-   `(company-tooltip ((,class (:weight bold :foreground, far-background :background ,inactive-gray))))
-   `(company-tooltip-annotation ((,class (:weight normal :foreground ,comment :background ,inactive-gray))))
-   `(company-tooltip-annotation-selection ((,class (:weight normal :inherit company-tooltip-selection))))
-   `(company-tooltip-common ((,class (:weight normal :inherit company-tooltip))))
-   `(company-tooltip-common-selection ((,class (:weight normal :inherit company-tooltip-selection))))
-   ;; `(company-tooltip-mouse ((,class ())))
-   ;; `(company-tooltip-search ((,class ())))
-   `(company-tooltip-selection ((,class (:weight bold :foreground ,foreground :background ,current-line))))
-
-   ;; Powerline
-   `(powerline-active1 ((t (:foreground ,foreground :background ,selection))))
-   `(powerline-active2 ((t (:foreground ,foreground :background ,inactive-gray))))
-   `(powerline-inactive1 ((t (:foreground ,comment :background ,selection))))
-   `(powerline-inactive2 ((t (:foreground ,comment :background ,selection))))
-
-   ;; Spaceline
-   `(spaceline-python-venv ((t (:foreground ,yellow))))
-   `(spaceline-evil-normal ((t (:foreground ,foreground :background ,orange :inherit mode-line))))
-   `(spaceline-evil-insert ((t (:foreground ,background :background ,green :inherit mode-line))))
-   `(spaceline-evil-visual ((t (:foreground ,foreground :background ,selection :inherit mode-line))))
-
-   ;; Spacemacs
-   `(spacemacs-normal-face ((t (:inherit spaceline-evil-normal))))
-   `(spacemacs-insert-face ((t (:inherit spaceline-evil-insert))))
-   `(spacemacs-visual-face ((t (:inherit spaceline-evil-visual))))
 
    ;; Outline
    `(outline-1 ((,class (:inherit nil :foreground ,"#eceff1"))))
@@ -669,7 +484,6 @@
    `(outline-7 ((,class (:inherit nil :foreground ,"aquamarine1"))))
    `(outline-8 ((,class (:inherit nil :foreground ,purple))))
    `(outline-9 ((,class (:inherit nil :foreground ,"LightSteelBlue1"))))
-
 
    ;; Ledger-mode
    `(ledger-font-comment-face ((,class (:inherit font-lock-comment-face))))
@@ -864,7 +678,7 @@
 
   (custom-theme-set-variables
    'ajj-dark
-   `(fci-rule-color ,current-line)
+   `(fci-rule-color , "#303030")
    `(vc-annotate-color-map
      '((20  . ,red)
        (40  . ,orange)

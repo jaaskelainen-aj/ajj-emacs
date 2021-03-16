@@ -4,9 +4,10 @@
   (add-hook 'web-mode-hook     'mc-set-html-mode)
   (add-hook 'nxml-mode-hook    'mc-set-nxml-mode)
   (add-hook 'text-mode-hook    'mc-set-txt-mode)
+  (add-hook 'org-mode-hook     'mc-set-org-mode)
+  (add-hook 'conf-mode-hook    'mc-set-conf-mode)
   ;; Programmin modes
   (add-hook 'c-mode-common-hook     'mc-set-cc-mode)
-  ;;(add-hook 'c++-mode-hook   'mc-set-c++-mode)
   (add-hook 'java-mode-hook    'mc-set-java-mode)
   (add-hook 'sql-mode-hook     'mc-set-sql-mode)
   (add-hook 'php-mode-hook     'mc-set-php-mode)
@@ -54,7 +55,7 @@
   (show-paren-mode)
   (global-hl-line-mode)
   (electric-pair-mode)
-  (projectile-mode)
+  (projectile-mode +1)
 
   ;; PHP
   ;;(when (file-directory-p "~/ajj-emacs/ext/php")
@@ -76,7 +77,6 @@
     (show-trailing-whitespace	. t)
     (indent-tabs-mode           . nil)
     (tab-width                  . 4)
-    (fill-column		. 85)
     (c-offsets-alist            . ((innamespace . 0)
                                    (inline-open . 0)
                                    (arglist-intro konecpp-arglist-indent)
@@ -91,6 +91,7 @@
   (setq case-fold-search nil)
   (setq compilation-always-kill t)
   (setq compilation-ask-about-save nil)
+  (fci-mode)
   ;; Offsets
   ;; (c-set-offset 'arglist-intro 'konecc-arglist-indent)
   ;; (c-set-offset 'inher-intro ++)
@@ -105,6 +106,7 @@
   (define-key map [S-f8] 'projectile-find-other-file)
   (define-key map [C-f8] 'mc-narrow-to-function)
   (define-key map [C-delete] 'mc-remove-right-wspace)
+  (define-key map (kbd "s-\"") '(lambda() (interactive) (insert "\"<<x<<\"")))
   ;; web server dev macros
   (define-key map (kbd "M-g s") '(lambda() (interactive) (insert "\"<<GETS(0x0000)<<\"")))
   (define-key map (kbd "M-g p") '(lambda() (interactive) (insert "\"<p>\"<<GETS(0x0000)<<\"</p>\"")))  
@@ -136,10 +138,23 @@
   (setq tab-width 4)
   )
 
+(defun mc-set-org-mode ()
+  (interactive)
+  (define-key org-mode-map (kbd "C-c c") (kbd "C-c C-x C-b"))
+  (define-key org-mode-map (kbd "C-c v") (kbd "C-u C-u C-c C-x C-b"))
+  )
+
+(defun mc-set-conf-mode ()
+  (setq tab-width 4)
+  )
+
 (defun mc-set-cc-mode ()
   (c-set-style "KoneCPP")
+  (setq fill-column 101)
   (mc-set-programming-mode c-mode-base-map)
+  (define-key c-mode-base-map [C-M-tab] 'clang-format-region)
   (setq compile-command "./remote-build.sh")
+  (setq ag-file-type "--cpp")
   ;;(message "Menacon cc-mode enabled.")
   )
 
@@ -187,6 +202,7 @@
   "Menacon html mode extras"
   (setq indent-tabs-mode nil)
   (setq fill-column 110)
+  (fci-mode)
   ;(define-key html-helper-mode-map [C-delete] 'mc-remove-right-wspace)
   ;(define-key html-helper-mode-map "\C-c\C-d" 'mc-sgml-del-tag-contents)
   )
@@ -204,16 +220,16 @@
   "Menacon Python mode extras"
   (setq indent-tabs-mode nil)
   (setq tab-width 4)
-  (setq fill-column 120)  
+  (setq fill-column 120)
   ;;(setq whitespace-style (quote (face space-before-tab indentation-tab space-after-tab )))
-  
   (whitespace-mode)
   )
 
 (defun mc-set-php-mode()
   "Menacon php-mode"
   (setq indent-tabs-mode nil)
-  (setq fill-column 110)  
+  (setq fill-column 105)
+  (fci-mode)
   (setq tab-width 4)
   (setq php-template-compatibility nil)
   (c-set-offset 'case-label -)
@@ -229,7 +245,6 @@
   (define-key robot-mode-map (kbd "<backtab>") '(lambda() (interactive) (insert "    ")))
   (setq fill-column 140)
   (whitespace-mode)
-  
   ;;(message "Menacon robot mode set.")
   )
 

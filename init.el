@@ -27,6 +27,8 @@
       (define-key global-map [s-tab] 'next-multiframe-window)
       ;; (global-set-key (kbd "C->") 'previous-multiframe-window)
       (tool-bar-mode 0)
+      (set-frame-width (selected-frame) 150)
+      (set-frame-height (selected-frame) 75)
       (setq mac-command-modifier (quote control))
       (setq mac-control-modifier (quote super))
       (setq mac-option-modifier (quote meta))
@@ -46,8 +48,8 @@
 
 ;; See install-base.el also
 (require 'package)
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
-                         ("melpa" . "https://melpa.org/packages/")))
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+;; ("gnu" . "https://elpa.gnu.org/packages/")
 (package-initialize)
 
 (load "menacon-pkg")
@@ -58,8 +60,6 @@
 
 (setq custom-theme-directory "~/ajj-emacs/themes/")
 (load-theme 'ajj-light t)
-
-;;(add-hook 'speedbar-load-hook (lambda () (require 'semantic/sb)))
 
 (prefer-coding-system 'utf-8-unix)
 ;(setq auto-coding-alist (cons '("\\.\\(html\\|utf8\\|sql\\|java\\|php\\|sh\\)\\'" . utf-8-unix) auto-coding-alist))
@@ -94,15 +94,15 @@
 (global-set-key (kbd "s-<down>") 'end-of-buffer)
 (global-set-key (kbd "M-<up>") 'c-beginning-of-defun)
 (global-set-key (kbd "M-<down>") 'c-end-of-defun)
-(global-set-key (kbd "s-r") 'copy-to-register)
 (global-set-key (kbd "<s-return>") 'overwrite-mode)
 (global-set-key (kbd "C-=") 'mc-select-this-word)
 
-(global-set-key "\M-n" 'other-window)
-(global-set-key "\C-\M-\\" 'indent-region)
-(global-set-key "\C-\M-n" '(lambda () (interactive) (insert "<<'\\n'")))
+(global-set-key (kbd "M-n") 'other-window)
+(global-set-key (kbd "C-x C-b") 'buffer-menu-other-window)
+(global-set-key (kbd "C-M-\\") 'indent-region)
+(global-set-key (kbd "C-M-n") '(lambda () (interactive) (insert "<<'\\n'")))
 (global-set-key (kbd "C-M-'") '(lambda () (interactive) (insert "\\\"")))
-(global-set-key "\C-h\C-c" 'describe-face)
+(global-set-key (kbd "C-h C-c") 'describe-face)
 (global-set-key "§" '(lambda() (interactive)(insert "´")))
 (global-set-key (kbd "s->") '(lambda() (interactive)(insert "»")))
 (global-set-key (kbd "s-<") '(lambda() (interactive)(insert "«")))
@@ -163,6 +163,7 @@
   buffers-menu-max-size 20
   inhibit-startup-screen t
   initial-scratch-message nil
+  help-window-select t
   ;;
   grep-command "grep  -n "
   grep-find-command
@@ -174,12 +175,12 @@
   )
 
 (custom-set-variables
- '(speedbar-default-position (quote right))
+ '(speedbar-default-position (quote left))
  '(speedbar-directory-button-trim-method (quote trim))
  '(speedbar-frame-parameters
    (quote
     ((minibuffer)
-     (width . 30)
+     (width . 40)
      (border-width . 0)
      (menu-bar-lines . 0)
      (tool-bar-lines . 0)
@@ -192,8 +193,9 @@
  '(speedbar-sort-tags nil)
  '(speedbar-track-mouse-flag nil)
  '(speedbar-use-tool-tips-flag nil)
- '(speedbar-vc-do-check t)
+ '(speedbar-vc-do-check nil)
+ '(speedbar-use-images nil)
  )
 
-(setq-default fill-column 120)
+(setq-default fill-column 101)
 (setq-default show-paren-mode 1)

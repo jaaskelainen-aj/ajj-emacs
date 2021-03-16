@@ -32,7 +32,7 @@
   "Open notes from workspace a-d"
   (interactive "cWorkspace (a-d)")
   (let (fname)
-    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/kone-ajjnotes.txt" ws))
+    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/ajjnotes.org" ws))
     (find-file fname)
     )
   )
