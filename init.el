@@ -59,7 +59,7 @@
 (mc-modes-init)
 
 (setq custom-theme-directory "~/ajj-emacs/themes/")
-(load-theme 'ajj-light t)
+(load-theme 'ajj-dark t)
 
 (prefer-coding-system 'utf-8-unix)
 ;(setq auto-coding-alist (cons '("\\.\\(html\\|utf8\\|sql\\|java\\|php\\|sh\\)\\'" . utf-8-unix) auto-coding-alist))

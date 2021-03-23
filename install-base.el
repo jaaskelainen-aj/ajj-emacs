@@ -1,7 +1,7 @@
 ;; execute: emacs --batch -l install-base.el -q
 (defvar base-pkg-list
-  '(cc-mode which-key helm rtags magit helm-rtags helm-ag projectile helm-projectile swiper-helm cff))
-;; possilbe: swiper-helm 
+  '(cff clang-format company fill-column-indicator gnu-elpa-keyring-update js2-mode json-mode magit-find-file markdown-mode php-mode projectile s web-mode yasnippet)
+  )
 
 (require 'package)
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
