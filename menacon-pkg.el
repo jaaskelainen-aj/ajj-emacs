@@ -19,6 +19,9 @@
 (define-key global-map (kbd "C-,") 'rtags-find-references)
 
 ;; ------------------------------
+(require 'company)
+(require 'company-tabnine)
+(add-to-list 'company-backends #'company-tabnine)
 
 ;; ------------------------------
 ;; MAGIT

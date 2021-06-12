@@ -202,7 +202,9 @@
   "Menacon html mode extras"
   (setq indent-tabs-mode nil)
   (setq fill-column 110)
-  (fci-mode)
+  (define-key web-mode-map (kbd "C-M-p") '(lambda () (interactive) (insert "<p></p>")))
+  (define-key web-mode-map (kbd "C-M-a") '(lambda () (interactive) (insert "<a href=\"\"></a>")))
+  ;(fci-mode)
   ;(define-key html-helper-mode-map [C-delete] 'mc-remove-right-wspace)
   ;(define-key html-helper-mode-map "\C-c\C-d" 'mc-sgml-del-tag-contents)
   )
@@ -244,6 +246,7 @@
   (setq tab-width 4)
   (define-key robot-mode-map (kbd "<backtab>") '(lambda() (interactive) (insert "    ")))
   (setq fill-column 140)
+  (setq truncate-lines t)
   (whitespace-mode)
   ;;(message "Menacon robot mode set.")
   )

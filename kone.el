@@ -1,20 +1,20 @@
 (defun kone-desktop-save()
-  "Saves desktop to /Volumes/KONE"
+  "Saves desktop to /Volumes/kone"
   (interactive)
-  (desktop-save "/Volumes/KONE/" t)
+  (desktop-save "/Volumes/kone/" t)
   )
 
 (defun kone-desktop-read()
-  "Saves desktop to /Volumes/KONE"
+  "Saves desktop to /Volumes/kone"
   (interactive)
-  (desktop-read "/Volumes/KONE/")
+  (desktop-read "/Volumes/kone/")
   )
 
 (defun kone-gcparams(ws)
   "Open gcparams from particular workspace a-d"
   (interactive "cWorkspace (a-d)")
   (let (fname)
-    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/src/gcparams/gcparams.json" ws))
+    (setq fname (format "/Volumes/kone/ws-%c/kcegc/src/gcparams/gcparams.json" ws))
     (find-file fname)
     )
   )
@@ -23,7 +23,7 @@
   "Open gcparams from particular workspace a-d"
   (interactive "cWorkspace (a-d)")
   (let (fname)
-    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/config/pnb118/sitesnippet.conf" ws))
+    (setq fname (format "/Volumes/kone/ws-%c/kcegc/config/pnb118/sitesnippet.conf" ws))
     (find-file fname)
     )
   )
@@ -32,7 +32,7 @@
   "Open notes from workspace a-d"
   (interactive "cWorkspace (a-d)")
   (let (fname)
-    (setq fname (format "/Volumes/KONE/ws-%c/kcegc/ajjnotes.org" ws))
+    (setq fname (format "/Volumes/kone/ws-%c/kcegc/ajjnotes.org" ws))
     (find-file fname)
     )
   )
@@ -40,7 +40,7 @@
 (defun kone-desktop()
   "Open Kone desktop"
   (interactive)
-  (desktop-change-dir "/Volumes/KONE/" )
+  (desktop-change-dir "/Volumes/kone/" )
   )
 
 (defun kone-jsonpath()

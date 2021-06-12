@@ -1,6 +1,7 @@
 ;; execute: emacs --batch -l install-base.el -q
+;; Remember to install Hack font: https://github.com/source-foundry/Hack
 (defvar base-pkg-list
-  '(cff clang-format company fill-column-indicator gnu-elpa-keyring-update js2-mode json-mode magit-find-file markdown-mode php-mode projectile s web-mode yasnippet)
+  '(cff clang-format company fill-column-indicator gnu-elpa-keyring-update js2-mode json-mode magit-find-file markdown-mode php-mode projectile rtags s web-mode yasnippet)
   )
 
 (require 'package)
