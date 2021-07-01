@@ -9,7 +9,7 @@
 (when (eq system-type 'gnu/linux)
   (when window-system
     (tool-bar-mode 0)
-    (set-face-font 'default "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
+    ;(set-face-font 'default "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")
     (setq server-socket-dir "~/.emacs.d/")
     (server-start)
     ))
