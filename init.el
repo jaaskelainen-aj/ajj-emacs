@@ -44,7 +44,7 @@
 
 ;; Our own prefix, needed by our init packages
 (define-prefix-command 'mc-prefix)
-(global-set-key (kbd "s-m") 'mc-prefix)
+(global-set-key (kbd "M-m") 'mc-prefix)
 
 ;; See install-base.el also
 (require 'package)

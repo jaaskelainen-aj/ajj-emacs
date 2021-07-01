@@ -1,6 +1,16 @@
 (defvar mc-replace-original nil "Menacon replacement function orginal text")
 (defvar mc-replace-text nil "Menacon replacement function replacement text")
 
+
+;; ==========================================================================================
+(defun prj-ajj ()
+  "Initiate ajj-project"
+  (interactive)
+  (speedbar)
+  (find-file "/Volumes/menacon/vshare/base6/ajj/ajjnotes.org")
+  )
+
+;; ==========================================================================================
 (defun mc-replace ()
   "Replaces text. First call copies the original text from current selection
   Second call copies text to replace. Third call starts the query-replace process"
